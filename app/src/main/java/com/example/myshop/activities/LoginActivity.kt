@@ -2,20 +2,19 @@ package com.example.myshop.activities
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.service.autofill.OnClickAction
+import android.text.Editable
 import android.text.TextUtils
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.TextView
+import android.widget.EditText
 import androidx.core.content.ContextCompat.startActivity
 import com.example.myshop.R
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
 
-class LoginActivity : BaseActivity(), View.OnClickListener {
+class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -33,25 +32,19 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-    }
 
-    override fun onClick(view: View?) {
-        if (view!=null){
-            when (view.id){
-                R.id.tv_forgot_password-> {}
-                R.id.btn_login -> {
-                    validateLoginDetails()
-                }
-
-                R.id.tv_register -> {
-                    val intent = Intent(this, RegisterActivity::class.java)
-                    startActivity(intent)
-                }
-            }
+        tv_register.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
+
+        btn_login.setOnClickListener {
+            userLogin()
+        }
+
     }
 
-    private fun validateLoginDetails():Boolean{
+
+        private fun validateLoginDetails():Boolean{
         return when {
             TextUtils.isEmpty(et_email_login.text.toString().trim{ it <= ' '}) ->{  // to trim trailing and leading spaces
                 showErrorSnackBar(resources.getString(R.string.err_email), true)
@@ -62,11 +55,37 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 false }
 
             else ->{
-                showErrorSnackBar(resources.getString(R.string.login_successful), false)
+                //showErrorSnackBar(resources.getString(R.string.login_successful), false)
                 true
             }
 
         }
     }
+
+    private fun userLogin(){
+
+        if (validateLoginDetails()){
+            showDialogProgress(resources.getString(R.string.please_wait))
+
+            val email: String = et_email_login.text.toString().trim { it <= ' ' }
+            val password: String = et_password_login.text.toString().trim { it <= ' ' }
+
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+
+                    hideProgressDialog()
+                    if (task.isSuccessful){
+                        showErrorSnackBar("You are Logged in Successfully", false)
+                    }
+                    else{
+                        showErrorSnackBar(task.exception!!.message.toString(), true)
+                    }
+                }
+        }
+
+    }
+
+
+
 
 }

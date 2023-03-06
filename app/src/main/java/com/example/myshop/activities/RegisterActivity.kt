@@ -38,7 +38,7 @@ class RegisterActivity : BaseActivity() {
             startActivity(intent)
         }
 
-        btn_login.setOnClickListener {
+        btn_register.setOnClickListener {
             registerUser()
         }
 

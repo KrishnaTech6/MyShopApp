@@ -161,7 +161,7 @@
             </LinearLayout>
 
             <com.example.myshop.utils.MSPButton
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_small"
@@ -184,7 +184,7 @@
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_login">
+                app:layout_constraintTop_toBottomOf="@+id/btn_register">
 
                 <com.example.myshop.utils.MSPTextView
                     android:id="@+id/tv_already_have_acc"
