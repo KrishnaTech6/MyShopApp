@@ -53,6 +53,7 @@
                 <com.example.myshop.utils.MSPEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/et_first_name"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,6 +73,7 @@
                 <com.example.myshop.utils.MSPEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/et_last_name"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -88,6 +90,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
                 <com.example.myshop.utils.MSPEditText
+                    android:id="@+id/et_email_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
@@ -106,6 +109,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
                 <com.example.myshop.utils.MSPEditText
+                    android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
@@ -124,6 +128,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
 
                 <com.example.myshop.utils.MSPEditText
+                    android:id="@+id/et_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
@@ -143,12 +148,15 @@
                 android:gravity="center_horizontal">
 
                 <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/cb_tandc"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
+
                 <com.example.myshop.utils.MSPTextView
+                    android:id="@+id/tv_terms_conditions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/terms_conditions"/>
+                    android:text="@string/terms_conditions" />
 
             </LinearLayout>
 
@@ -179,6 +187,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_login">
 
                 <com.example.myshop.utils.MSPTextView
+                    android:id="@+id/tv_already_have_acc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Already have an Account?" />

@@ -10,10 +10,11 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1545" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1545" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.2689814814814815" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.11746987951807229" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/progress_dialog.xml" value="0.335" />
       </map>
     </option>
   </component>

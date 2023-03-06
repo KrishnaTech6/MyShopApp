@@ -4,4 +4,14 @@
     <string name="forgot_password">forgot password?</string>
     <string name="register"><ub>Register</ub></string>
     <string name="terms_conditions">I Agree To The <u>Terms &amp; Conditions </u></string>
+    <string name="err_first_name">Please Enter First Name </string>
+    <string name="err_last_name">Please Enter Last Name</string>
+    <string name="err_email">Please Enter your Email Id</string>
+    <string name="err_password">Your Password can\'t be empty</string>
+    <string name="err_password_not_equal_confirm_pass">Password Mismatch</string>
+    <string name="msg_thanks_registering">You have been Registered </string>
+    <string name="err_agree_tandc">Please agree to the Terms and Conditions</string>
+    <string name="invalid_email">Invalid email id</string>
+    <string name="please_wait">Please Wait&#8230;</string>
+    <string name="login_successful">Welcome!</string>
 </resources>
