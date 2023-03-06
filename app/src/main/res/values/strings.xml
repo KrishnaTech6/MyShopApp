@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyShop</string>
+    <string name="login">LOGIN</string>
+    <string name="forgot_password">forgot password?</string>
+    <string name="register"><ub>Register</ub></string>
+    <string name="terms_conditions">I Agree To The <u>Terms &amp; Conditions </u></string>
+</resources>
