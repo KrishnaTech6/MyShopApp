@@ -40,6 +40,9 @@ class LoginActivity : BaseActivity() {
         btn_login.setOnClickListener {
             userLogin()
         }
+        tv_forgot_password.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+        }
 
     }
 
@@ -75,6 +78,8 @@ class LoginActivity : BaseActivity() {
 
                     hideProgressDialog()
                     if (task.isSuccessful){
+
+                        //TODO- send user to MainActivity
                         showErrorSnackBar("You are Logged in Successfully", false)
                     }
                     else{

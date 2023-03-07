@@ -14,4 +14,6 @@
     <string name="invalid_email">Invalid email id</string>
     <string name="please_wait">Please Wait&#8230;</string>
     <string name="login_successful">Welcome!</string>
+    <string name="tv_for_password">FORGOT PASSWORD?</string>
+    <string name="submit">SUBMIT</string>
 </resources>
