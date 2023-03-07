@@ -5,12 +5,15 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.EditText
 import androidx.core.content.ContextCompat.startActivity
 import com.example.myshop.R
+import com.example.myshop.firestore.FirestoreClass
+import com.example.myshop.models.User
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -76,21 +79,32 @@ class LoginActivity : BaseActivity() {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
 
-                    hideProgressDialog()
-                    if (task.isSuccessful){
 
-                        //TODO- send user to MainActivity
-                        showErrorSnackBar("You are Logged in Successfully", false)
+                    if (task.isSuccessful){
+                        FirestoreClass().getUserDetails(this@LoginActivity)
                     }
                     else{
+                        hideProgressDialog()
                         showErrorSnackBar(task.exception!!.message.toString(), true)
+
                     }
                 }
         }
 
     }
 
+    fun userLoggedInSuccess(user: User){
+        hideProgressDialog()
 
+        Log.i("First name: ", user.firstName )
+        Log.i("Last name: ",user.lastName)
+        Log.i("Email name: ",user.email)
+
+        //Redirecting to main activity
+        startActivity(Intent (this@LoginActivity, MainActivity::class.java))
+        finish()
+
+    }
 
 
 }
