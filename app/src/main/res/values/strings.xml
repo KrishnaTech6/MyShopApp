@@ -16,4 +16,5 @@
     <string name="login_successful">Welcome!</string>
     <string name="tv_for_password">FORGOT PASSWORD?</string>
     <string name="submit">SUBMIT</string>
+    <string name="registered_successfully">You are registered successfully!</string>
 </resources>

@@ -6,7 +6,10 @@ import android.text.TextUtils
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toast
 import com.example.myshop.R
+import com.example.myshop.firestore.FirestoreClass
+import com.example.myshop.models.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -110,20 +113,40 @@ class RegisterActivity : BaseActivity() {
                 .createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(
                     OnCompleteListener<AuthResult> { task->
-                        hideProgressDialog() //hide progress dialog
+
                         if (task.isSuccessful) {
                             val firebaseUser: FirebaseUser  = task.result!!.user!!
 
+                            val user = User(
+                                firebaseUser.uid,
+                                et_first_name.text.toString().trim{it <=' '},
+                                et_last_name.text.toString().trim{it <=' '},
+                                et_email_id.text.toString().trim{it <=' '}
+                            )
+
+                            FirestoreClass().registerUser(this@RegisterActivity, user)
+
                             //showErrorSnackBar("User has been registered ${firebaseUser.uid}", false)
-                            FirebaseAuth.getInstance().signOut()
-                            finish()
+//                           FirebaseAuth.getInstance().signOut()
+//                           finish()
 
                         }
                         else{
+                            hideProgressDialog()
                             showErrorSnackBar(task.exception!!.message.toString(), true)
                         }
                     }
                 )
         }
+    }
+
+     fun userRegisterSuccess(){
+        hideProgressDialog()
+
+        Toast.makeText(
+            this@RegisterActivity,
+                    resources.getString(R.string.registered_successfully),
+                    Toast.LENGTH_LONG)
+            .show()
     }
 }
