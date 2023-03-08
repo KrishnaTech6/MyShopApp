@@ -1,7 +1,10 @@
 package com.example.myshop.firestore
 
 import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
+import android.widget.Toast
 import com.example.myshop.activities.LoginActivity
 import com.example.myshop.activities.RegisterActivity
 import com.example.myshop.models.User
@@ -58,6 +61,19 @@ class FirestoreClass {
                 Log.i(activity.javaClass.simpleName, document.toString())
 
                 val user= document.toObject(User::class.java)!!
+
+                val sharedPreferences = activity.getSharedPreferences(
+                    Constants.MYSHOP_PREFERENCES,
+                    Context.MODE_PRIVATE
+                )
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                //key:value       logged_in_username : Krishna Rana
+                // in the form of key value pairs
+                editor.putString(
+                    Constants.LOOGED_IN_USERNAME,
+                    "${user.firstName} ${user.lastName}"
+                )
+                editor.apply()
                 //todo: pass the result to login screen
 
                 when(activity){
@@ -67,6 +83,7 @@ class FirestoreClass {
                 }
             }
             .addOnFailureListener {
+
 
 
             }
