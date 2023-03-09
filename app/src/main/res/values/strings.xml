@@ -17,4 +17,6 @@
     <string name="tv_for_password">FORGOT PASSWORD?</string>
     <string name="submit">SUBMIT</string>
     <string name="registered_successfully">You are registered successfully!</string>
+    <string name="your_profile">YOUR PROFILE</string>
+    <string name="save">SAVE</string>
 </resources>

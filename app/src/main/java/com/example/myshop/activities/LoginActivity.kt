@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat.startActivity
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.User
+import com.example.myshop.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -100,8 +101,23 @@ class LoginActivity : BaseActivity() {
         Log.i("Last name: ",user.lastName)
         Log.i("Email name: ",user.email)
 
-        //Redirecting to main activity
-        startActivity(Intent (this@LoginActivity, MainActivity::class.java))
+        //Redirecting to main
+
+        if (user.profileCompleted== 0){
+
+            val intent = Intent (this@LoginActivity, UserProfileActivity::class.java)
+            intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
+            /*
+            due to parcel we are able to send an object (user: User) as we made User parcelable
+            otherwise we couldn't do that
+            */
+            startActivity(intent)
+
+        }
+        else{
+            startActivity(Intent (this@LoginActivity, MainActivity::class.java))
+
+        }
         finish()
 
     }
