@@ -1,6 +1,9 @@
 package com.example.myshop.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,6 +14,7 @@ import com.example.myshop.R
 import com.example.myshop.models.User
 import com.example.myshop.utils.Constants
 import kotlinx.android.synthetic.main.activity_user_profile.*
+import java.io.IOException
 import java.util.jar.Manifest
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener{
@@ -44,7 +48,8 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener{
 
                     if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED){
-                        showErrorSnackBar("You already have the Storage Permission", false)
+                        //showErrorSnackBar("You already have the Storage Permission", false)
+                        Constants.showImageChooser(this)
                     }
 
                     else{
@@ -73,13 +78,34 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener{
 
         if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE){
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED ){
-                showErrorSnackBar("Storage Permission Granted", false)
+                //showErrorSnackBar("Storage Permission Granted", false)
+                Constants.showImageChooser(this)
             }
             else{
                 Toast.makeText(this,
                     resources.getString(R.string.read_storage_permission_denied),
                     Toast.LENGTH_LONG).show()
 
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode== Activity.RESULT_OK){
+            if(requestCode==Constants.PICK_IMAGE_REQUEST_CODE){
+                if (data!=null){
+                    try {
+                        val selectedImageUri = data.data!!
+                        iv_photo.setImageURI(selectedImageUri)
+                    }catch (e: IOException){
+                        e.printStackTrace()
+                        Toast.makeText(this@UserProfileActivity,
+                        resources.getString(R.string.image_selection_failed),
+                        Toast.LENGTH_SHORT).show()
+
+                    }
+                }
             }
         }
     }
