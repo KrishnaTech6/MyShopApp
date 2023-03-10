@@ -51,11 +51,18 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:background="@color/grey"
-                    android:src="@drawable/user_image"/>
+                    android:src="@drawable/ic_user_placeholder"/>
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/add_user_photo_symbol"
+                    android:layout_gravity="bottom|right"
+                    android:src="@drawable/add_user_photo_24"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/user_image_border"/>
+
 
             </FrameLayout>
 

@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.example.myshop.R
 import com.example.myshop.models.User
 import com.example.myshop.utils.Constants
+import com.example.myshop.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 import java.util.jar.Manifest
@@ -97,7 +98,9 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener{
                 if (data!=null){
                     try {
                         val selectedImageUri = data.data!!
-                        iv_photo.setImageURI(selectedImageUri)
+                        GlideLoader(this).loadUserPicture(selectedImageUri, iv_photo)
+
+                        //iv_photo.setImageURI(selectedImageUri)
                     }catch (e: IOException){
                         e.printStackTrace()
                         Toast.makeText(this@UserProfileActivity,
