@@ -138,7 +138,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
                 <com.example.myshop.utils.MSPEditText
-                    android:id="@+id/mobile"
+                    android:id="@+id/et_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone" />

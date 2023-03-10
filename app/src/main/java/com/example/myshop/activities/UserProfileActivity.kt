@@ -3,42 +3,52 @@ package com.example.myshop.activities
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.Image
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.myshop.R
+import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.User
 import com.example.myshop.utils.Constants
 import com.example.myshop.utils.GlideLoader
+import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 import java.util.jar.Manifest
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener{
+
+    private lateinit var mUserDetails: User
+    private var mSelectedImageFileUri : Uri? = null
+    private var mUploadedImageFileURL : String =""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
-        var userDetails: User = User()
+
 
         if (intent.hasExtra(Constants.EXTRA_USER_DETAILS)){
-            userDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
+            mUserDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
         }
 
         et_first_name.isEnabled = false
-        et_first_name.setText(userDetails.firstName)
+        et_first_name.setText(mUserDetails.firstName)
 
         et_last_name.isEnabled = false
-        et_last_name.setText(userDetails.lastName)
+        et_last_name.setText(mUserDetails.lastName)
 
         et_email_id.isEnabled = false
-        et_email_id.setText(userDetails.email)
+        et_email_id.setText(mUserDetails.email)
 
         iv_photo.setOnClickListener(this@UserProfileActivity)
+        btn_submit_user.setOnClickListener(this@UserProfileActivity)
     }
 
     override fun onClick(view: View?) {
@@ -64,10 +74,54 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener{
                     }
                 }
 
+                R.id.btn_submit_user ->{
+                    if (validateUserProfileDetails()){
+                        showDialogProgress(resources.getString(R.string.please_wait))
 
+                        if (mSelectedImageFileUri !=null){
+                            FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri)
+                        }
+                        else{
+                           updateUserProfileDetails()
+                        }
+                    }
+                }
             }
         }
 
+    }
+
+    private fun updateUserProfileDetails(){
+        val userHashMap= HashMap<String, Any>()
+
+        val mobileNo = et_mobile.text.toString().trim{it <=' '}
+
+        val gender = if (rb_male.isChecked)
+            Constants.MALE
+        else Constants.FEMALE
+
+        if (mobileNo.isNotEmpty()){
+            userHashMap[Constants.MOBILE] = mobileNo.toLong()
+        }
+        if (mUploadedImageFileURL.isNotEmpty()){
+            userHashMap[Constants.IMAGE] = mUploadedImageFileURL
+        }
+
+        userHashMap[Constants.GENDER] = gender
+
+
+        FirestoreClass().updateUserProfileData(this, userHashMap)
+    }
+
+    fun userProfileUpdateSuccess(){
+        hideProgressDialog()
+
+        Toast.makeText(this@UserProfileActivity,
+        resources.getString(R.string.msg_profile_update_success),
+        Toast.LENGTH_LONG).show()
+
+        startActivity(Intent(this@UserProfileActivity, MainActivity::class.java))
+        finish()
     }
 
     override fun onRequestPermissionsResult(
@@ -97,8 +151,8 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener{
             if(requestCode==Constants.PICK_IMAGE_REQUEST_CODE){
                 if (data!=null){
                     try {
-                        val selectedImageUri = data.data!!
-                        GlideLoader(this).loadUserPicture(selectedImageUri, iv_photo)
+                        mSelectedImageFileUri = data.data!!
+                        GlideLoader(this).loadUserPicture(mSelectedImageFileUri!!, iv_photo)
 
                         //iv_photo.setImageURI(selectedImageUri)
                     }catch (e: IOException){
@@ -112,4 +166,25 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener{
             }
         }
     }
+
+    private fun validateUserProfileDetails(): Boolean{
+        return when{
+            TextUtils.isEmpty(et_mobile.text.toString().trim{it <=' '}) ->{
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_mobile_no), true)
+                false
+            }
+            else -> {
+                true
+            }
+        }
+
+    }
+
+    fun imageUploadSuccess(imageUrl: String){
+        mUploadedImageFileURL = imageUrl
+        updateUserProfileDetails()
+
+    }
+
+
 }
