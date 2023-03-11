@@ -1,19 +1,19 @@
 package com.example.myshop.activities
 
 import android.app.Dialog
-import android.content.Context
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import com.example.myshop.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.progress_dialog.*
-import org.checkerframework.checker.units.qual.m
 
 open class BaseActivity : AppCompatActivity() {
 
     private lateinit var mProgressDialog: Dialog
+    private var doubleBackToExitPressedOnce= false
 
     fun showErrorSnackBar(message: String, errorMessage: Boolean){
         val snackbar= Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
@@ -56,6 +56,23 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun hideProgressDialog() = mProgressDialog.dismiss()
+
+    fun doubleBackToExit(){
+
+        if (doubleBackToExitPressedOnce){
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce= true
+
+        Toast.makeText(this,
+        resources.getString(R.string.please_click_back_again_to_exit),
+        Toast.LENGTH_LONG)
+            .show()
+
+        Handler(Looper.getMainLooper()).postDelayed({doubleBackToExitPressedOnce =false}, 2000)
+    }
 
 
 

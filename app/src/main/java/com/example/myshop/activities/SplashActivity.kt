@@ -2,12 +2,12 @@ package com.example.myshop.activities
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myshop.R
 
 class SplashActivity : AppCompatActivity() {
@@ -33,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
         //to show splash screen for 15s and go to main screen
         Handler(Looper.getMainLooper()).postDelayed(
             {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, DashboardActivity::class.java)
                 startActivity(intent)
                 finish()
             }, 1500
