@@ -111,7 +111,7 @@ class LoginActivity : BaseActivity() {
 
         }
         else{
-            startActivity(Intent (this@LoginActivity, MainActivity::class.java))
+            startActivity(Intent (this@LoginActivity, DashboardActivity::class.java))
 
         }
         finish()
