@@ -16,39 +16,39 @@
         android:theme="@style/Theme.MyShop"
         tools:targetApi="31">
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name="com.example.myshop.ui.activities.DashboardActivity"
             android:exported="false"
             android:label="@string/app_name" />
         <activity
-            android:name=".activities.UserProfileActivity"
+            android:name="com.example.myshop.ui.activities.UserProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/noActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activities.ForgotPasswordActivity"
+            android:name="com.example.myshop.ui.activities.ForgotPasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/noActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activities.BaseActivity"
+            android:name="com.example.myshop.ui.activities.BaseActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name="com.example.myshop.ui.activities.RegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/noActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name="com.example.myshop.ui.activities.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="com.example.myshop.ui.activities.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
@@ -59,7 +59,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.example.myshop.ui.activities.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

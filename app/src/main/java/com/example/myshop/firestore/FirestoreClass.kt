@@ -5,19 +5,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
-import com.example.myshop.activities.BaseActivity
-import com.example.myshop.activities.LoginActivity
-import com.example.myshop.activities.RegisterActivity
-import com.example.myshop.activities.UserProfileActivity
+import com.example.myshop.ui.activities.LoginActivity
+import com.example.myshop.ui.activities.RegisterActivity
+import com.example.myshop.ui.activities.UserProfileActivity
 import com.example.myshop.models.User
 import com.example.myshop.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -136,7 +131,7 @@ class FirestoreClass{
                 Log.e("Downloadable Image URL", uri.toString())
 
                 when(activity){
-                    is UserProfileActivity->{
+                    is UserProfileActivity ->{
                         activity.imageUploadSuccess(uri.toString())
                     }
                 }

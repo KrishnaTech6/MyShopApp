@@ -1,9 +1,7 @@
-package com.example.myshop.activities
-import android.content.Intent
+package com.example.myshop.ui.activities
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.Window
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.TextView

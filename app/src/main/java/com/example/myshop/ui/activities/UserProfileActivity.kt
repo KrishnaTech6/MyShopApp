@@ -1,11 +1,9 @@
-package com.example.myshop.activities
+package com.example.myshop.ui.activities
 
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.Image
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -17,10 +15,8 @@ import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.User
 import com.example.myshop.utils.Constants
 import com.example.myshop.utils.GlideLoader
-import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
-import java.util.jar.Manifest
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener{
 

@@ -1,4 +1,4 @@
-package com.example.myshop.activities.ui.notifications
+package com.example.myshop.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle

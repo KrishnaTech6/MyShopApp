@@ -1,16 +1,11 @@
-package com.example.myshop.activities
+package com.example.myshop.ui.activities
 
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
-import android.util.Log
-import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.EditText
-import androidx.core.content.ContextCompat.startActivity
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.User
