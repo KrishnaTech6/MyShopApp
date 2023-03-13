@@ -1,6 +1,7 @@
 package com.example.myshop.ui.activities
 
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -15,6 +16,10 @@ class DashboardActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar!!.setBackgroundDrawable(
+            ContextCompat.getDrawable(this@DashboardActivity, R.drawable.app_background)
+        )
 
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
