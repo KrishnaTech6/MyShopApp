@@ -2,13 +2,18 @@ package com.example.myshop.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.User
+import com.example.myshop.utils.Constants
 import com.example.myshop.utils.GlideLoader
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_settings.*
 
-class SettingsActivity : BaseActivity() {
+class SettingsActivity : BaseActivity() , View.OnClickListener{
+    private var userDetails : User = User()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -18,11 +23,8 @@ class SettingsActivity : BaseActivity() {
         supportActionBar?.title = ""
 
 
-        edit_settings.setOnClickListener{
-
-            val intent = Intent(this@SettingsActivity, UserProfileActivity::class.java)
-            startActivity(intent)
-        }
+        btn_logout.setOnClickListener(this)
+        edit_settings.setOnClickListener(this)
 
 
     }
@@ -35,7 +37,7 @@ class SettingsActivity : BaseActivity() {
         toolbar_settings_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
-    private fun getUserDetailsSettings(){
+    private fun getUserDetails(){
         showDialogProgress(resources.getString(R.string.please_wait))
         FirestoreClass().getUserDetails(this)
     }
@@ -53,7 +55,34 @@ class SettingsActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        getUserDetailsSettings()
+        getUserDetails()
     }
+
+    override fun onClick(view: View?) {
+
+        if (view!=null){
+            when(view.id){
+                R.id.btn_logout ->{
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(this@SettingsActivity, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK  //TO clear out all the existing activities and start again
+                    startActivity(intent)
+
+                }
+
+                R.id.edit_settings -> {
+                    val intent = Intent(this@SettingsActivity, UserProfileActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_USER_DETAILS, userDetails)
+                    //TODO("I want to Retrieve user data updated profile")
+                    startActivity(intent)
+                }
+
+            }
+
+        }
+
+
+    }
+
 
 }

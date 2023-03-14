@@ -45,12 +45,10 @@ class FirestoreClass{
 
     }
 
-    private fun getCurrentUserID(): String{
+    fun getCurrentUserID(): String{
         val currentUser = FirebaseAuth.getInstance().currentUser
-        var currentUserID = ""
-
-        currentUserID= currentUser!!.uid
-
+        var currentUserID: String= ""
+        currentUserID = currentUser!!.uid
         return currentUserID
     }
 

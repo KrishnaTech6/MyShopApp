@@ -20,9 +20,10 @@ import java.io.IOException
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener{
 
-    private var mUserDetails: User = User()   //putting it equal to User() set default value if not putExtra
+    private lateinit var mUserDetails: User
     private var mSelectedImageFileUri : Uri? = null
     private var mUploadedImageFileURL : String =""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,8 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener{
         if (intent.hasExtra(Constants.EXTRA_USER_DETAILS)){
             mUserDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
         }
+
+        var sett_user = mUserDetails
 
         et_first_name.isEnabled = false
         et_first_name.setText(mUserDetails.firstName)
