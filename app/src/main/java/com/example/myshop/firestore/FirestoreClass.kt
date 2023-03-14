@@ -5,10 +5,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import com.example.myshop.models.User
 import com.example.myshop.ui.activities.LoginActivity
 import com.example.myshop.ui.activities.RegisterActivity
+import com.example.myshop.ui.activities.SettingsActivity
 import com.example.myshop.ui.activities.UserProfileActivity
-import com.example.myshop.models.User
 import com.example.myshop.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -44,9 +45,9 @@ class FirestoreClass{
 
     }
 
-    fun getCurrentUserID(): String{
+    private fun getCurrentUserID(): String{
         val currentUser = FirebaseAuth.getInstance().currentUser
-        var currentUserID: String = "";
+        var currentUserID = ""
 
         currentUserID= currentUser!!.uid
 
@@ -81,12 +82,24 @@ class FirestoreClass{
                     is LoginActivity -> {
                         activity.userLoggedInSuccess(user)
                     }
+                    is SettingsActivity -> {
+                        activity.userDetailsSuccess(user)
+                    }
                 }
             }
-            .addOnFailureListener {
+            .addOnFailureListener { e ->
+                when(activity){
+                    is LoginActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is SettingsActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
 
-
-
+                Log.e(activity.javaClass.simpleName,
+                "Error while getting user details.",
+                e)
             }
 
     }

@@ -20,7 +20,7 @@ import java.io.IOException
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener{
 
-    private lateinit var mUserDetails: User
+    private var mUserDetails: User = User()   //putting it equal to User() set default value if not putExtra
     private var mSelectedImageFileUri : Uri? = null
     private var mUploadedImageFileURL : String =""
 
