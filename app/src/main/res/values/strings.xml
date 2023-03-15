@@ -37,4 +37,5 @@
     <string name="edit">EDIT</string>
     <string name="logout">LOGOUT</string>
     <string name="edit_profile">EDIT PROFILE</string>
+    <string name="action_add_product">Add Product</string>
 </resources>

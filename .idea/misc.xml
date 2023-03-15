@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/drawable/gender_radio_btn_selector.xml" value="0.119" />
         <entry key="app/src/main/res/drawable/gender_radio_tab_text_color_selector.xml" value="0.119" />
         <entry key="app/src/main/res/drawable/ic_back_arrow_base_24.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.1925" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1545" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1545" />
         <entry key="app/src/main/res/drawable/ic_next_arrow.xml" value="0.1285" />
@@ -34,6 +35,7 @@
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.21805555555555556" />
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.21805555555555556" />
         <entry key="app/src/main/res/layout/progress_dialog.xml" value="0.335" />
+        <entry key="app/src/main/res/menu/add_products_menu.xml" value="0.21712962962962962" />
         <entry key="app/src/main/res/menu/dashboard_menu.xml" value="0.21805555555555556" />
       </map>
     </option>
