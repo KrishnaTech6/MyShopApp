@@ -17,7 +17,7 @@
     <string name="tv_for_password">FORGOT PASSWORD?</string>
     <string name="submit">SUBMIT</string>
     <string name="registered_successfully">You are registered successfully!</string>
-    <string name="your_profile">YOUR PROFILE</string>
+    <string name="your_profile">COMPLETE PROFILE</string>
     <string name="save">SAVE</string>
     <string name="read_storage_permission_denied">Oops, you just denied storage the permission for storage . You can also allow it from settings.</string>
     <string name="image_selection_failed">Image selection Failed!</string>
@@ -36,4 +36,5 @@
     <string name="addresses">Addresses</string>
     <string name="edit">EDIT</string>
     <string name="logout">LOGOUT</string>
+    <string name="edit_profile">EDIT PROFILE</string>
 </resources>

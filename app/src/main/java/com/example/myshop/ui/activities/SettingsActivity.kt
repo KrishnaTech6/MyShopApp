@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : BaseActivity() , View.OnClickListener{
-    private var userDetails : User = User()
+    private lateinit var userDetails : User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +45,8 @@ class SettingsActivity : BaseActivity() , View.OnClickListener{
      fun userDetailsSuccess(user: User){
         hideProgressDialog()
 
+         userDetails = user
+
         GlideLoader(this@SettingsActivity).loadUserPicture(user.image, iv_user_profile_photo)
 
         name_settings.text = "${user.firstName} ${user.lastName}"
@@ -73,7 +75,6 @@ class SettingsActivity : BaseActivity() , View.OnClickListener{
                 R.id.edit_settings -> {
                     val intent = Intent(this@SettingsActivity, UserProfileActivity::class.java)
                     intent.putExtra(Constants.EXTRA_USER_DETAILS, userDetails)
-                    //TODO("I want to Retrieve user data updated profile")
                     startActivity(intent)
                 }
 
