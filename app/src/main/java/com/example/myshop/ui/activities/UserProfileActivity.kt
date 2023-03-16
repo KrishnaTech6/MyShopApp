@@ -187,6 +187,8 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener{
         if (resultCode== Activity.RESULT_OK){
             if(requestCode==Constants.PICK_IMAGE_REQUEST_CODE){
                 if (data!=null){
+                    add_user_photo_symbol.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_edit_24))
+
                     try {
                         mSelectedImageFileUri = data.data!!
                         GlideLoader(this).loadUserPicture(mSelectedImageFileUri!!, iv_photo)

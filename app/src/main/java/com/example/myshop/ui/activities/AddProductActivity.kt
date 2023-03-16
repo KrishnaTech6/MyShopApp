@@ -1,15 +1,23 @@
 package com.example.myshop.ui.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.myshop.R
 import com.example.myshop.utils.Constants
+import com.example.myshop.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_product.*
+import java.io.IOException
 
 class AddProductActivity : BaseActivity(), View.OnClickListener {
+    private var mSelectedImageFileUri: Uri? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_product)
@@ -18,6 +26,7 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
         supportActionBar?.title= ""
 
         iv_product_image.setOnClickListener(this)
+        btn_submit_product.setOnClickListener(this)
     }
 
     private fun setupActionbar(){
@@ -46,7 +55,83 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
                         Constants.READ_STORAGE_PERMISSION_CODE)
                     }
                 }
+
+                R.id.btn_submit_product ->{
+                    if (validateAddProductDetails()){
+                        showErrorSnackBar("Valid Data!", false)
+                    }
+                }
             }
+        }
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE){
+            if (grantResults.isNotEmpty() && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                Constants.showImageChooser(this)
+            }
+            else{
+                Toast.makeText(this,
+                    resources.getString(R.string.read_storage_permission_denied),
+                    Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode== Activity.RESULT_OK){
+            if(requestCode==Constants.PICK_IMAGE_REQUEST_CODE){
+                if (data!=null){
+                    try {
+                        iv_edit_product_photo.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_edit_24))
+                         mSelectedImageFileUri = data.data!!
+                        GlideLoader(this).loadUserPicture(mSelectedImageFileUri!!, iv_product_image)
+
+                        //iv_photo.setImageURI(selectedImageUri)
+                    }catch (e: IOException){
+                        e.printStackTrace()
+
+                    }
+                }
+            }
+        }
+    }
+
+    private fun validateAddProductDetails():Boolean{
+        return when
+        {
+            TextUtils.isEmpty(et_product_title.text.toString().trim{it <=' '}) ->{
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_title),true)
+                false
+            }
+            TextUtils.isEmpty(et_product_price.text.toString().trim{it <=' '}) ->{
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_price),true)
+                false
+            }
+            TextUtils.isEmpty(et_product_desc.text.toString().trim{it <=' '}) ->{
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_desc),true)
+                false
+            }
+            TextUtils.isEmpty(et_product_quantity.text.toString().trim{it <=' '}) ->{
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_quantity),true)
+                false
+            }
+            (mSelectedImageFileUri ==null) ->{
+                showErrorSnackBar(resources.getString(R.string.err_msg_select_product_image),true)
+                false
+            }
+            else ->{
+                return true
+            }
+
         }
 
     }
