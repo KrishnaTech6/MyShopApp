@@ -33,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
         //to show splash screen for 15s and go to main screen
         Handler(Looper.getMainLooper()).postDelayed(
             {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, AddProductActivity::class.java)
                 startActivity(intent)
                 finish()
             }, 1500

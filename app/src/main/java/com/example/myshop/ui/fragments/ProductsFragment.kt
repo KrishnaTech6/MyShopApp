@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentProductsBinding
-import com.example.myshop.ui.activities.MainActivity
+import com.example.myshop.ui.activities.AddProductActivity
 
 
 class ProductsFragment : Fragment() {
@@ -45,7 +45,7 @@ class ProductsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.action_add_product ->{
-                startActivity(Intent(activity, MainActivity::class.java))
+                startActivity(Intent(activity, AddProductActivity::class.java))
                 return true
             }
         }

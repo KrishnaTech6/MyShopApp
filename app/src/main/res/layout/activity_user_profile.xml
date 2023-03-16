@@ -58,7 +58,7 @@
                     android:layout_height="50dp"
                     android:id="@+id/add_user_photo_symbol"
                     android:layout_gravity="bottom|right"
-                    android:src="@drawable/add_user_photo_24"/>
+                    android:src="@drawable/add_photo_icon_24"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
