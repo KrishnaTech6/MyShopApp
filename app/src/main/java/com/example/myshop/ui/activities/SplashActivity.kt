@@ -9,6 +9,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myshop.R
+import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +34,18 @@ class SplashActivity : AppCompatActivity() {
         //to show splash screen for 15s and go to main screen
         Handler(Looper.getMainLooper()).postDelayed(
             {
-            val intent = Intent(this, AddProductActivity::class.java)
-                startActivity(intent)
-                finish()
+                if (FirebaseAuth.getInstance().currentUser== null){
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+
+                }
+                else{
+                    val intent = Intent(this, DashboardActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
             }, 1500
         )
     }
