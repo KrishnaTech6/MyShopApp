@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.myshop.R
+import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.utils.Constants
 import com.example.myshop.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_product.*
@@ -58,7 +59,7 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
 
                 R.id.btn_submit_product ->{
                     if (validateAddProductDetails()){
-                        showErrorSnackBar("Valid Data!", false)
+                        uploadProductImage()
                     }
                 }
             }
@@ -134,5 +135,13 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
 
         }
 
+    }
+    fun uploadProductImage(){
+        showDialogProgress(resources.getString(R.string.please_wait))
+        FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri, Constants.PRODUCT_IMAGE)
+    }
+    fun imageUploadSuccess(imageUrl: String){
+        hideProgressDialog()
+        showErrorSnackBar("Image Uploaded $imageUrl", false)
     }
 }

@@ -6,10 +6,7 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import com.example.myshop.models.User
-import com.example.myshop.ui.activities.LoginActivity
-import com.example.myshop.ui.activities.RegisterActivity
-import com.example.myshop.ui.activities.SettingsActivity
-import com.example.myshop.ui.activities.UserProfileActivity
+import com.example.myshop.ui.activities.*
 import com.example.myshop.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -127,9 +124,9 @@ class FirestoreClass{
             }
     }
 
-    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?){
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String){
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "."
+            imageType + System.currentTimeMillis() + "."
                     + Constants.getFileExtension( activity, imageFileURI)
         )
         sRef.putFile(imageFileURI!!).addOnSuccessListener { taskSnapshot ->
@@ -145,6 +142,9 @@ class FirestoreClass{
                     is UserProfileActivity ->{
                         activity.imageUploadSuccess(uri.toString())
                     }
+                    is AddProductActivity ->{
+                        activity.imageUploadSuccess(uri.toString())
+                    }
                 }
             }
 
@@ -153,6 +153,9 @@ class FirestoreClass{
 
                 when(activity){
                     is UserProfileActivity ->{
+                        activity.hideProgressDialog()
+                    }
+                    is AddProductActivity ->{
                         activity.hideProgressDialog()
                     }
                 }
