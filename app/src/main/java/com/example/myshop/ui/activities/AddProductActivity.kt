@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
+import com.example.myshop.models.Products
 import com.example.myshop.utils.Constants
 import com.example.myshop.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_product.*
@@ -19,6 +20,8 @@ import java.io.IOException
 
 class AddProductActivity : BaseActivity(), View.OnClickListener {
     private var mSelectedImageFileUri: Uri? =null
+    private var mProductImageUploadURL: String =""
+    private lateinit var products: Products
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_product)
@@ -28,6 +31,7 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
 
         iv_product_image.setOnClickListener(this)
         btn_submit_product.setOnClickListener(this)
+
     }
 
     private fun setupActionbar(){
@@ -137,11 +141,34 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
 
     }
     fun uploadProductImage(){
-        showDialogProgress(resources.getString(R.string.please_wait))
         FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri, Constants.PRODUCT_IMAGE)
     }
     fun imageUploadSuccess(imageUrl: String){
+        mProductImageUploadURL = imageUrl
+//        hideProgressDialog()
+//        showErrorSnackBar("Image Uploaded $imageUrl", false)
+        uploadProductData()
+    }
+    fun productUploadSuccess(){
         hideProgressDialog()
-        showErrorSnackBar("Image Uploaded $imageUrl", false)
+
+        Toast.makeText(
+            this@AddProductActivity,
+            resources.getString(R.string.product_uploaded_successfully),
+            Toast.LENGTH_LONG)
+            .show()
+    }
+
+    private fun uploadProductData(){
+        products = Products(
+             FirestoreClass().getCurrentUserID() + {et_product_title.text.toString().trim{it<= ' '}},
+            et_product_title.text.toString().trim{it<= ' '},
+            et_product_price.text.toString().trim{it<=' '},
+            et_product_desc.text.toString().trim{it<= ' '},
+            et_product_quantity.text.toString().trim{it<=' '},
+            mProductImageUploadURL
+        )
+        showDialogProgress(resources.getString(R.string.please_wait))
+        FirestoreClass().uploadProductData(this, products)
     }
 }

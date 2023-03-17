@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import com.example.myshop.models.Products
 import com.example.myshop.models.User
 import com.example.myshop.ui.activities.*
 import com.example.myshop.utils.Constants
@@ -36,6 +37,27 @@ class FirestoreClass{
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while Registering the user. ",
+                    e
+                )
+            }
+
+    }
+
+    fun uploadProductData(activity: AddProductActivity, productInfo: Products){
+
+        mFirestore.collection(Constants.PRODUCTS)
+            .document(productInfo.productId)
+            .set(productInfo, SetOptions.merge())   //set is to upload data
+            //setoptions is set to merge so that if later
+            //on we want other entries, it merge the data rather than replacing
+            .addOnSuccessListener {
+                activity.productUploadSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while uploading the product data.",
                     e
                 )
             }
