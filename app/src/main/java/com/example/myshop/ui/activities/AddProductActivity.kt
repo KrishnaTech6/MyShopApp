@@ -1,6 +1,7 @@
 package com.example.myshop.ui.activities
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -141,6 +142,7 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
 
     }
     fun uploadProductImage(){
+        showDialogProgress(resources.getString(R.string.please_wait))
         FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri, Constants.PRODUCT_IMAGE)
     }
     fun imageUploadSuccess(imageUrl: String){
@@ -157,18 +159,23 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
             resources.getString(R.string.product_uploaded_successfully),
             Toast.LENGTH_LONG)
             .show()
+        finish()
     }
 
     private fun uploadProductData(){
+        val username = this.getSharedPreferences(
+            Constants.MYSHOP_PREFERENCES, Context.MODE_PRIVATE)
+            .getString(Constants.LOOGED_IN_USERNAME, "")!!
+
         products = Products(
-             FirestoreClass().getCurrentUserID() + {et_product_title.text.toString().trim{it<= ' '}},
+             FirestoreClass().getCurrentUserID(),
+             username,
             et_product_title.text.toString().trim{it<= ' '},
             et_product_price.text.toString().trim{it<=' '},
             et_product_desc.text.toString().trim{it<= ' '},
             et_product_quantity.text.toString().trim{it<=' '},
             mProductImageUploadURL
         )
-        showDialogProgress(resources.getString(R.string.please_wait))
         FirestoreClass().uploadProductData(this, products)
     }
 }

@@ -5,9 +5,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import androidx.fragment.app.Fragment
 import com.example.myshop.models.Products
 import com.example.myshop.models.User
 import com.example.myshop.ui.activities.*
+import com.example.myshop.ui.fragments.ProductsFragment
 import com.example.myshop.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -46,7 +48,7 @@ class FirestoreClass{
     fun uploadProductData(activity: AddProductActivity, productInfo: Products){
 
         mFirestore.collection(Constants.PRODUCTS)
-            .document(productInfo.productId)
+            .document()
             .set(productInfo, SetOptions.merge())   //set is to upload data
             //setoptions is set to merge so that if later
             //on we want other entries, it merge the data rather than replacing
@@ -189,6 +191,31 @@ class FirestoreClass{
                 )
             }
 
+
+    }
+
+    fun getProductList(fragment: Fragment){
+        mFirestore.collection(Constants.PRODUCTS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Products List", document.documents.toString())
+                val productsList: ArrayList<Products> = ArrayList()
+
+                for (i in document.documents){
+                    val product = i.toObject(Products::class.java)
+                    product!!.product_id = i.id
+                    productsList.add(product)
+                }
+
+                when(fragment){
+                    is ProductsFragment ->{
+                        fragment.successProductsListFromFirestore(productsList)
+                    }
+                }
+
+            }
+            .addOnFailureListener {  }
 
     }
 
