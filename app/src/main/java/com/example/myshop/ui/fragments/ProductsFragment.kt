@@ -3,14 +3,12 @@ package com.example.myshop.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentProductsBinding
 import com.example.myshop.ui.activities.AddProductActivity
 
 
-class ProductsFragment : Fragment() {
+class ProductsFragment : BaseFragment() {
 
 
     private var _binding: FragmentProductsBinding? = null
@@ -28,11 +26,6 @@ class ProductsFragment : Fragment() {
     ): View? {
         _binding = FragmentProductsBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textProducts
-
-        textView.text = "This is Products Fragment"
-
         return root
 
     }

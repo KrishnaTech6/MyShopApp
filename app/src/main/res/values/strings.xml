@@ -44,4 +44,5 @@
     <string name="err_msg_enter_product_quantity">Enter product quantity.</string>
     <string name="err_msg_select_product_image">Please select product image.</string>
     <string name="product_uploaded_successfully">Product uploaded successfully!</string>
+    <string name="products_not_found">No products added yet.</string>
 </resources>
