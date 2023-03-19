@@ -46,4 +46,5 @@
     <string name="product_uploaded_successfully">Product uploaded successfully!</string>
     <string name="products_not_found">No products added yet.</string>
     <string name="dashboard_item_not_found">No items found!</string>
+    <string name="deleting">deleting...</string>
 </resources>

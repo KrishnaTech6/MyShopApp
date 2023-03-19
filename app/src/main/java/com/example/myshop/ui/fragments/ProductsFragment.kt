@@ -1,8 +1,10 @@
 package com.example.myshop.ui.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentProductsBinding
@@ -33,13 +35,48 @@ class ProductsFragment : BaseFragment() {
             tv_no_products_found.visibility  = View.GONE
             rv_recyclerview_products.layoutManager = LinearLayoutManager(activity) //didnt understand
             rv_recyclerview_products.setHasFixedSize(true)
-            val adapterProducts = MyProductsAdapter(requireActivity(), productsList)
+            val adapterProducts = MyProductsAdapter(requireActivity(), productsList, this)
             rv_recyclerview_products.adapter = adapterProducts
         }
         else{
             rv_recyclerview_products.visibility = View.GONE
             tv_no_products_found.visibility  = View.VISIBLE
         }
+
+    }
+    private fun deleteProduct(productId: String){
+        showProgressDialog(resources.getString(R.string.deleting))
+        FirestoreClass().deleteProduct(this, productId)
+    }
+    fun successProductDeletion(){
+        hideProgressDialog()
+        Toast.makeText(requireActivity(),
+            "Deleted Successfully.",
+            Toast.LENGTH_SHORT)
+            .show()
+
+        getProductListFromFirestore()
+
+    }
+
+    //Standard Alert Dialog
+    fun showAlertDialogToDeleteProducts(productId: String){
+        val builder= AlertDialog.Builder(requireActivity())
+            builder.setTitle("Delete")
+        builder.setMessage("Are you sure you want to delete the product?")
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+        builder.setPositiveButton("Yes"){ dialogInterface, _ ->
+            //delete the product
+            deleteProduct(productId)
+            dialogInterface.dismiss()
+        }
+        builder.setNegativeButton("No"){ dialogInterface, _ ->
+            dialogInterface.dismiss()
+        }
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+
 
     }
     private fun getProductListFromFirestore(){

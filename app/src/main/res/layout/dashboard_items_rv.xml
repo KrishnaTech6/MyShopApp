@@ -25,15 +25,13 @@
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/margin_mini"
             android:layout_marginEnd="@dimen/margin_mini"
-            android:background="@drawable/user_image_border"
+            android:background="@color/grey"
             android:padding="4dp" />
 
         <LinearLayout
             android:id="@+id/ll_db_products_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_mini"
-            android:layout_marginTop="@dimen/margin_mini"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_db_product"
@@ -44,6 +42,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_micro_plus"
+                android:layout_marginStart="@dimen/margin_mini"
+                android:layout_marginTop="@dimen/margin_mini"
                 tools:text="Product name"
                 android:textSize="18sp" />
 
@@ -52,6 +52,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_micro_plus"
+                android:layout_marginStart="@dimen/margin_mini"
+                android:layout_marginTop="@dimen/margin_mini"
                 tools:text="Rs. 1200"
                 android:textSize="16sp" />
         </LinearLayout>
