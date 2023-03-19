@@ -47,4 +47,5 @@
     <string name="products_not_found">No products added yet.</string>
     <string name="dashboard_item_not_found">No items found!</string>
     <string name="deleting">deleting...</string>
+    <string name="product_details">PRODUCT DETAILS</string>
 </resources>
