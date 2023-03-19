@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="@dimen/margin_micro">
+    android:background="@color/colorImageBackgroundView"
+    android:padding="@dimen/margin_micro_plus">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,41 +13,51 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:background="@color/white"
         android:padding="@dimen/margin_mini">
         <ImageView
-            android:id="@+id/iv_item_product"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:id="@+id/iv_db_product"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
             android:padding="4dp"
+            android:layout_marginStart="@dimen/margin_mini"
+            android:layout_marginEnd="@dimen/margin_mini"
             android:background="@drawable/user_image_border"/>
 
         <LinearLayout
-            android:id="@+id/ll_products_item"
+            android:id="@+id/ll_db_products_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mini"
             android:layout_marginStart="@dimen/margin_mini"
             android:orientation="vertical"
-            android:layout_gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_item_product"
+            app:layout_constraintStart_toEndOf="@id/iv_db_product"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.example.myshop.utils.MSPTextViewBold
-                android:id="@+id/tv_product_title"
+                android:id="@+id/tv_db_product_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Product name"
                 android:textSize="24sp"
-                android:layout_marginBottom="@dimen/margin_mini"/>
+                android:layout_marginBottom="@dimen/margin_micro_plus"/>
 
             <com.example.myshop.utils.MSPTextView
-                android:id="@+id/tv_product_price"
+                android:id="@+id/tv_db_product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs. 1200"
+                android:layout_marginBottom="@dimen/margin_micro_plus"
+                android:textSize="20sp"/>
+            <com.example.myshop.utils.MSPTextView
+                android:id="@+id/tv_db_product_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Product price"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
         </LinearLayout>
 
 

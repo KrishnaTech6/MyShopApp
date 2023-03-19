@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.myshop.models.Products
 import com.example.myshop.models.User
 import com.example.myshop.ui.activities.*
+import com.example.myshop.ui.fragments.DashboardFragment
 import com.example.myshop.ui.fragments.ProductsFragment
 import com.example.myshop.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -215,7 +216,40 @@ class FirestoreClass{
                 }
 
             }
-            .addOnFailureListener {  }
+            .addOnFailureListener { e->
+                Log.e(
+                    javaClass.simpleName.toString(),
+                    "Error while getting product list",
+                    e
+                )
+            }
+
+    }
+
+
+    fun getDashboarItemsList(fragment: DashboardFragment){
+        mFirestore.collection(Constants.PRODUCTS)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Products List", document.documents.toString())
+                val productsList: ArrayList<Products> = ArrayList()
+
+                for (i in document.documents){
+                    val product = i.toObject(Products::class.java)
+                    product!!.product_id = i.id
+                    productsList.add(product)
+                }
+
+                fragment.successItemsListFromFirestore(productsList)
+
+            }
+            .addOnFailureListener { e->
+                Log.e(
+                    javaClass.simpleName.toString(),
+                    "Error while getting product list",
+                    e
+                )
+            }
 
     }
 

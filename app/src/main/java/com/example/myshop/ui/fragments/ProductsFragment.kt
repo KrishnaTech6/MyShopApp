@@ -31,7 +31,7 @@ class ProductsFragment : BaseFragment() {
         if (productsList.size > 0){
             rv_recyclerview_products.visibility = View.VISIBLE
             tv_no_products_found.visibility  = View.GONE
-            rv_recyclerview_products.layoutManager = LinearLayoutManager(activity)
+            rv_recyclerview_products.layoutManager = LinearLayoutManager(activity) //didnt understand
             rv_recyclerview_products.setHasFixedSize(true)
             val adapterProducts = MyProductsAdapter(requireActivity(), productsList)
             rv_recyclerview_products.adapter = adapterProducts
