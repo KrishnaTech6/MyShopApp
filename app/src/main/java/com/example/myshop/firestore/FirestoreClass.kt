@@ -271,4 +271,32 @@ class FirestoreClass{
 
     }
 
-}
+    fun getProductDetails(activity: Activity, productId: String){
+        mFirestore.collection(Constants.PRODUCTS)
+            .document(productId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(javaClass.simpleName.toString(), document.toString())
+                val product = document.toObject(Products::class.java)
+
+                when(activity){
+                    is ProductDetailsActivity ->{
+                        if (product != null) {
+                            activity.successProductDetails(product)
+                        }
+                    }
+                }
+            }
+            .addOnFailureListener { e->
+
+                when (activity){
+                    is ProductDetailsActivity ->{
+                        activity.hideProgressDialog()
+                        Log.e(javaClass.simpleName.toString(),
+                            "Error in deleting producuts ", e)
+
+                    }
+                }
+            }
+        }
+    }

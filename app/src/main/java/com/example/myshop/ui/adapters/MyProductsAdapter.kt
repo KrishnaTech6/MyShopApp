@@ -10,6 +10,7 @@ import com.example.myshop.R
 import com.example.myshop.models.Products
 import com.example.myshop.ui.activities.ProductDetailsActivity
 import com.example.myshop.ui.fragments.ProductsFragment
+import com.example.myshop.utils.Constants
 import com.example.myshop.utils.GlideLoader
 import kotlinx.android.synthetic.main.product_item.view.*
 
@@ -41,6 +42,7 @@ class MyProductsAdapter(private val context: Context,
 
             holder.view.setOnClickListener{
                 val intent = Intent(context, ProductDetailsActivity::class.java )
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID, item.product_id)
                 context.startActivity(intent)
             }
 
