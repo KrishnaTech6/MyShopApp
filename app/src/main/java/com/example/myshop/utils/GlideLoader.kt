@@ -21,4 +21,18 @@ class GlideLoader(val context: Context) {
             e.printStackTrace()
         }
     }
+
+    fun loadProductPicture(image: Any, imageView: ImageView ){
+        try {
+            //load the user image in imageView
+            Glide
+                .with(context)
+                .load(image)//uri of image
+                .centerCrop()//scale type of image
+                .into(imageView) //the view in  which image will be loaded
+
+        }catch (e:IOException){
+            e.printStackTrace()
+        }
+    }
 }

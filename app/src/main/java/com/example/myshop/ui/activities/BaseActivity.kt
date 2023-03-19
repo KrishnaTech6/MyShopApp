@@ -68,7 +68,7 @@ open class BaseActivity : AppCompatActivity() {
 
         Toast.makeText(this,
         resources.getString(R.string.please_click_back_again_to_exit),
-        Toast.LENGTH_LONG)
+        Toast.LENGTH_SHORT)
             .show()
 
         Handler(Looper.getMainLooper()).postDelayed({doubleBackToExitPressedOnce =false}, 2000)
