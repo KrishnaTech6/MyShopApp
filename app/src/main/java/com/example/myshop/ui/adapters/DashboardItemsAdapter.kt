@@ -29,7 +29,6 @@ class DashboardItemsAdapter(val context: Context, val items: ArrayList<Products>
             GlideLoader(context).loadProductPicture(item.productImage, holder.itemView.iv_db_product)
             holder.itemView.tv_db_product_title.text = item.productTitle
             holder.itemView.tv_db_product_price.text = "Rs.${item.productPrice}"
-            holder.itemView.tv_db_product_desc.text = item.productDescription
         }
 
     }

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentDashboardBinding
 import com.example.myshop.firestore.FirestoreClass
@@ -20,7 +20,6 @@ class DashboardFragment : BaseFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +39,7 @@ class DashboardFragment : BaseFragment() {
             rv_dashboard_items.visibility = View.VISIBLE
             tv_dashboard_item_not_found.visibility = View.GONE
 
-            rv_dashboard_items.layoutManager = LinearLayoutManager(activity)
+            rv_dashboard_items.layoutManager = GridLayoutManager(activity, 2)
             rv_dashboard_items.setHasFixedSize(true)
 
             val adapter= DashboardItemsAdapter(requireActivity(), itemsList)
