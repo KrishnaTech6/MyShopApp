@@ -51,8 +51,6 @@
                 android:text="Product price"
                 android:textSize="20sp" />
         </LinearLayout>
-
-
     </LinearLayout>
 
     <ImageButton
@@ -67,8 +65,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_delete_24" />
 
-
-
+    <ImageButton
+        android:id="@+id/ib_edit_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="@dimen/margin_mini"
+        android:layout_marginEnd="@dimen/margin_mini"
+        android:padding="@dimen/margin_micro_plus"
+        app:layout_constraintEnd_toStartOf="@+id/ib_delete_item"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_vector_edit_product" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,6 +48,7 @@ class ProductsFragment : BaseFragment() {
         showProgressDialog(resources.getString(R.string.deleting))
         FirestoreClass().deleteProduct(this, productId)
     }
+
     fun successProductDeletion(){
         hideProgressDialog()
         Toast.makeText(requireActivity(),

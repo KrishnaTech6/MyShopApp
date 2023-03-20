@@ -149,6 +149,32 @@ class FirestoreClass{
             }
     }
 
+    fun editProductData(activity: Activity,productId: String ,productHashMap: HashMap<String, Any>){
+        mFirestore.collection(Constants.PRODUCTS)
+            .document(productId)
+            .update(productHashMap)
+            .addOnSuccessListener {
+
+                when(activity){
+                    is EditProductDataActivity ->{
+                        activity.editProductDataSuccess()
+                    }
+                }
+
+            }
+            .addOnFailureListener { e ->
+                when(activity){
+                    is EditProductDataActivity ->{
+                        activity.hideProgressDialog()
+
+                        Log.e(activity.javaClass.simpleName,
+                            "error while updating the product Details",
+                            e)
+                    }
+                }
+            }
+    }
+
     fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String){
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
             imageType + System.currentTimeMillis() + "."
@@ -170,6 +196,9 @@ class FirestoreClass{
                     is AddProductActivity ->{
                         activity.imageUploadSuccess(uri.toString())
                     }
+                    is EditProductDataActivity ->{
+                        activity.imageUploadSuccess(uri.toString())
+                    }
                 }
             }
 
@@ -181,6 +210,9 @@ class FirestoreClass{
                         activity.hideProgressDialog()
                     }
                     is AddProductActivity ->{
+                        activity.hideProgressDialog()
+                    }
+                    is EditProductDataActivity ->{
                         activity.hideProgressDialog()
                     }
                 }
@@ -285,16 +317,25 @@ class FirestoreClass{
                             activity.successProductDetails(product)
                         }
                     }
+                    is EditProductDataActivity ->{
+                        if (product != null) {
+                            activity.successProductDetails(product)
+                        }
+                    }
                 }
             }
-            .addOnFailureListener { e->
+            .addOnFailureListener { e ->
 
                 when (activity){
                     is ProductDetailsActivity ->{
                         activity.hideProgressDialog()
                         Log.e(javaClass.simpleName.toString(),
                             "Error in deleting producuts ", e)
-
+                    }
+                    is EditProductDataActivity ->{
+                        activity.hideProgressDialog()
+                        Log.e(javaClass.simpleName.toString(),
+                            "Error in deleting producuts ", e)
                     }
                 }
             }

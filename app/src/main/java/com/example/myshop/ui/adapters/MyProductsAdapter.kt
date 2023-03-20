@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 import com.example.myshop.models.Products
+import com.example.myshop.ui.activities.EditProductDataActivity
 import com.example.myshop.ui.activities.ProductDetailsActivity
 import com.example.myshop.ui.fragments.ProductsFragment
 import com.example.myshop.utils.Constants
@@ -33,10 +34,24 @@ class MyProductsAdapter(private val context: Context,
 
             GlideLoader(context).loadProductPicture(item.productImage, holder.view.iv_item_product)
             holder.view.tv_product_title.text = item.productTitle
-            holder.view.tv_product_price.text = "Rs.${item.productPrice}"
+
+            if (holder.view.tv_product_price.text.contains("Rs.")){
+
+                holder.view.tv_product_price.text = item.productPrice
+            }else{
+                holder.view.tv_product_price.text = "Rs.${item.productPrice}"
+            }
+
 
             holder.view.ib_delete_item.setOnClickListener{
                 fragment.showAlertDialogToDeleteProducts(item.product_id)
+
+            }
+            holder.view.ib_edit_item.setOnClickListener{
+
+                val intent = Intent(context, EditProductDataActivity::class.java )
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID2, item.product_id)
+                context.startActivity(intent)
 
             }
 

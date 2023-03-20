@@ -48,4 +48,5 @@
     <string name="dashboard_item_not_found">No items found!</string>
     <string name="deleting">deleting...</string>
     <string name="product_details">PRODUCT DETAILS</string>
+    <string name="product_data_update_success">Product data updated successfully!</string>
 </resources>

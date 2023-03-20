@@ -116,6 +116,8 @@
                     android:text="100"
                     android:padding="@dimen/margin_micro"
                     android:background="@color/white"
+                    android:paddingStart="@dimen/margin_mini"
+                    android:paddingEnd="@dimen/margin_mini"
                     android:layout_marginEnd="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_micro_plus"
                     android:textSize="18sp"/>

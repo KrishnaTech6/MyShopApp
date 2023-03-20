@@ -23,6 +23,7 @@ object Constants {
     const val MOBILE: String = "mobile"
     const val GENDER: String = "gender"
     const val IMAGE: String = "image"
+
     const val COMPLETE_PROFILE: String = "profileCompleted"
 
 
@@ -34,6 +35,16 @@ object Constants {
 
 
     const val EXTRA_PRODUCT_ID: String = "extra_product_id"
+    const val EXTRA_PRODUCT_ID2: String = "extra_product_id2"
+
+
+    const val PRODUCT_TITLE: String = "productTitle"
+    const val PRODUCT_DESC: String = "productDescription"
+    const val PRODUCT_PRICE: String = "productPrice"
+    const val PRODUCT_QUANTITY: String = "productQuantity"
+    const val PRODUCT_IMAGE_FIRE: String = "productImage"
+
+
 
 
 
