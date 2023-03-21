@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.example.myshop.models.CartItem
 import com.example.myshop.models.Products
 import com.example.myshop.models.User
 import com.example.myshop.ui.activities.*
@@ -340,4 +341,21 @@ class FirestoreClass{
                 }
             }
         }
+
+    fun addCartItems(activity: ProductDetailsActivity , addToCart: CartItem){
+        mFirestore.collection(Constants.CART_ITEMS)
+            .document()
+            .set(addToCart , SetOptions.merge())
+            .addOnSuccessListener {
+                activity.addToCartSuccess()
+            }
+            .addOnFailureListener { e->
+                activity.hideProgressDialog()
+                Log.e(javaClass.simpleName.toString(),
+                    "Error while creating the document for cart",
+                    e)
+            }
+
+    }
+
     }

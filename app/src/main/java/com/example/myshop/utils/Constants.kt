@@ -46,6 +46,12 @@ object Constants {
     const val PRODUCT_IMAGE_EDIT: String = "productImage"
 
 
+    const val DEFAULT_CART_QUANTITY: String = "1"
+    const val CART_ITEMS: String = "cart_items"
+
+
+
+
 
 
 
