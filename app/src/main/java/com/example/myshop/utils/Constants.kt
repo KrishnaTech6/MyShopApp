@@ -42,7 +42,7 @@ object Constants {
     const val PRODUCT_DESC: String = "productDescription"
     const val PRODUCT_PRICE: String = "productPrice"
     const val PRODUCT_QUANTITY: String = "productQuantity"
-    const val PRODUCT_IMAGE_FIRE: String = "productImage"
+    const val PRODUCT_IMAGE_EDIT: String = "productImage"
 
 
 

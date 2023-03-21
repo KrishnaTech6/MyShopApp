@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_product_desc_pd"
-                tools:text="This is the product description textview that eill tell you about the data of the products."
+                tools:text="This is the product description textview that will tell you about the data of the products."
                 android:layout_marginStart="@dimen/margin_small"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:layout_marginBottom="@dimen/margin_micro_plus"

@@ -37,6 +37,8 @@ class EditProductDataActivity : BaseActivity() {
             Log.i("Product Id",mProductId)
         }
 
+        getProductDetails()
+
         iv_edit_product_image.setOnClickListener{
             if(ContextCompat.checkSelfPermission(this,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -45,75 +47,69 @@ class EditProductDataActivity : BaseActivity() {
                 Constants.showImageChooser(this@EditProductDataActivity)
             }
             else{
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(this@EditProductDataActivity,
                     arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
                     Constants.READ_STORAGE_PERMISSION_CODE)
             }
         }
 
         btn_submit_product_edit.setOnClickListener{
-            editProductData()
-            finish()
-        }
-        if (mSelectedImageFileUri!=null){
-            uploadProductImage()
-        }
-        else{
-            getProductDetails()
-        }
 
-
-    }
-
-
-
-
-override fun onRequestPermissionsResult(
-    requestCode: Int,
-    permissions: Array<out String>,
-    grantResults: IntArray
-) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-    if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE){
-        if (grantResults.isNotEmpty() && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-            Constants.showImageChooser(this)
-        }
-        else{
-            Toast.makeText(this,
-                resources.getString(R.string.read_storage_permission_denied),
-                Toast.LENGTH_LONG).show()
+            if (mSelectedImageFileUri!=null){
+                uploadProductImage()
+            }
+            else{
+                editProductData()
+            }
         }
     }
-}
 
-override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
-    if (resultCode== Activity.RESULT_OK){
-        if(requestCode==Constants.PICK_IMAGE_REQUEST_CODE){
-            if (data!=null){
-                try {
-                    //iv_icon_edit.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_edit_24))
-                    mSelectedImageFileUri = data.data!!
-                    GlideLoader(this).loadUserPicture(mSelectedImageFileUri!!, iv_edit_product_image)
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-                    //iv_photo.setImageURI(selectedImageUri)
-                }catch (e: IOException){
-                    e.printStackTrace()
+        if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE){
+            if (grantResults.isNotEmpty() && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                Constants.showImageChooser(this)
+            }
+            else{
+                Toast.makeText(this,
+                    resources.getString(R.string.read_storage_permission_denied),
+                    Toast.LENGTH_LONG).show()
+            }
+        }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode== Activity.RESULT_OK){
+            if(requestCode==Constants.PICK_IMAGE_REQUEST_CODE){
+                if (data!=null){
+                    try {
+
+                        mSelectedImageFileUri = data.data!!
+                        GlideLoader(this@EditProductDataActivity).loadUserPicture(mSelectedImageFileUri!!, iv_edit_product_image)
+
+                    }catch (e: IOException){
+                        e.printStackTrace()
+
+                    }
                 }
             }
         }
     }
-}
 
     private fun uploadProductImage(){
         showDialogProgress(resources.getString(R.string.please_wait))
         FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri, Constants.PRODUCT_IMAGE)
     }
     fun imageUploadSuccess(imageUrl: String){
+        hideProgressDialog()
         mProductImageUploadURL = imageUrl
-        getProductDetails()
+        editProductData()
     }
 
     private fun getProductDetails(){
@@ -140,7 +136,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
         GlideLoader(this).loadProductPicture(product.productImage, iv_edit_product_image)
     }
 
-    fun editProductData(){
+    private fun editProductData(){
         val productHashMap= HashMap<String, Any>()
 
         val productName = et_edit_product_title.text.toString().trim{it <=' '}
@@ -160,8 +156,9 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
             productHashMap[Constants.PRODUCT_QUANTITY] = productQuantity
         }
         if (mProductImageUploadURL.isNotEmpty()){
-            productHashMap[Constants.PRODUCT_IMAGE_FIRE] = mProductImageUploadURL
+            productHashMap[Constants.PRODUCT_IMAGE_EDIT] = mProductImageUploadURL
         }
+
         showDialogProgress(resources.getString(R.string.please_wait))
         FirestoreClass().editProductData(this, mProductId, productHashMap )
     }
@@ -173,6 +170,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
         Toast.makeText(this,
             resources.getString(R.string.product_data_update_success),
             Toast.LENGTH_LONG).show()
+        finish()
     }
 
 
