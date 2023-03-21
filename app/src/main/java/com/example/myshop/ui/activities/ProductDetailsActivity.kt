@@ -1,7 +1,7 @@
 package com.example.myshop.ui.activities
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.Products
@@ -20,8 +20,15 @@ class ProductDetailsActivity : BaseActivity() {
 
         if(intent.hasExtra(Constants.EXTRA_PRODUCT_ID)){
             mProductId = intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
-
-            Log.i("Product Id",mProductId)
+        }
+        var mUserId: String =""
+        if(intent.hasExtra(Constants.EXTRA_USER_ID)){
+            mUserId = intent.getStringExtra(Constants.EXTRA_USER_ID)!!
+        }
+        if (mUserId == FirestoreClass().getCurrentUserID()){
+            btn_add_to_cart.visibility = View.GONE
+        }else{
+            btn_add_to_cart.visibility = View.VISIBLE
         }
         getProductDetails()
     }

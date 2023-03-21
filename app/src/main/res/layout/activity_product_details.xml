@@ -123,6 +123,20 @@
                     android:textSize="18sp"/>
 
             </LinearLayout>
+            <com.example.myshop.utils.MSPButton
+                android:id="@+id/btn_add_to_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:foreground="?attr/selectableItemBackground"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:background="@drawable/button_background"
+                android:text="@string/add_to_cart"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </ScrollView>
 
