@@ -36,6 +36,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
         getProductDetails()
 
         btn_add_to_cart.setOnClickListener(this)
+        btn_go_to_cart.setOnClickListener(this)
     }
 
     private fun getProductDetails(){
@@ -54,16 +55,22 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
     fun successProductDetails(product: Products){
 
         mProductDatails = product
-        hideProgressDialog()
+        //hideProgressDialog()
         tv_product_name_pd.text = product.productTitle
         tv_product_price_pd.text = "Rs.${product.productPrice}"
         tv_product_desc_pd.text = product.productDescription
         tv_product_quantity_pd.text = product.productQuantity
         GlideLoader(this).loadProductPicture(product.productImage, iv_product_details)
+
+        if (FirestoreClass().getCurrentUserID() == product.user_id){
+            hideProgressDialog()
+        }else{
+            FirestoreClass().checkIfItemExistInCart(this, mProductId)
+        }
     }
 
     private fun addToCart(){
-        val addToCart = CartItem(
+        val cartItems = CartItem(
             FirestoreClass().getCurrentUserID(),
             mProductId,
             mProductDatails.productTitle,
@@ -73,7 +80,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
             mProductDatails.productQuantity
         )
 
-        FirestoreClass().addCartItems(this, addToCart)
+        showDialogProgress(resources.getString(R.string.please_wait))
+        FirestoreClass().addCartItems(this, cartItems)
     }
     fun addToCartSuccess(){
         hideProgressDialog()
@@ -82,6 +90,18 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
         resources.getString(R.string.item_added_to_cart),
         Toast.LENGTH_LONG
         ).show()
+
+        btn_add_to_cart.visibility = View.GONE
+        btn_go_to_cart.visibility = View.VISIBLE
+
+    }
+
+    fun productExistsInCart(){
+        hideProgressDialog()
+
+        btn_add_to_cart.visibility = View.GONE
+        btn_go_to_cart.visibility = View.VISIBLE
+
     }
 
     override fun onClick(v: View?) {

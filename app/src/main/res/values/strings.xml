@@ -51,4 +51,5 @@
     <string name="product_data_update_success">Product data updated successfully!</string>
     <string name="add_to_cart">ADD TO CART</string>
     <string name="item_added_to_cart">Item was added to the cart.</string>
+    <string name="go_to_cart">GO TO CART</string>
 </resources>
