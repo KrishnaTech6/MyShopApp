@@ -9,6 +9,7 @@ import com.example.myshop.R
 import com.example.myshop.databinding.FragmentDashboardBinding
 import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.Products
+import com.example.myshop.ui.activities.MyCartActivity
 import com.example.myshop.ui.activities.SettingsActivity
 import com.example.myshop.ui.adapters.DashboardItemsAdapter
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -83,6 +84,10 @@ class DashboardFragment : BaseFragment() {
         when(item.itemId){
             R.id.settings_action ->{
                 startActivity(Intent(activity, SettingsActivity::class.java))
+                return true
+            }
+            R.id.cart_action ->{
+                startActivity(Intent(activity, MyCartActivity::class.java))
                 return true
             }
         }

@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_item_product"
+            android:id="@+id/iv_item"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="@drawable/user_image_border"
@@ -45,7 +45,7 @@
                 android:textSize="24sp" />
 
             <com.example.myshop.utils.MSPTextView
-                android:id="@+id/tv_product_price"
+                android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Product price"
@@ -64,18 +64,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_delete_24" />
-
-    <ImageButton
-        android:id="@+id/ib_edit_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:layout_marginTop="@dimen/margin_mini"
-        android:layout_marginEnd="@dimen/margin_mini"
-        android:padding="@dimen/margin_micro_plus"
-        app:layout_constraintEnd_toStartOf="@+id/ib_delete_item"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_vector_edit_product" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

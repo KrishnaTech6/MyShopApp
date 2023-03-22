@@ -258,8 +258,6 @@ class FirestoreClass{
             }
 
     }
-
-
     fun getDashboarItemsList(fragment: DashboardFragment){
         mFirestore.collection(Constants.PRODUCTS)
             .get()

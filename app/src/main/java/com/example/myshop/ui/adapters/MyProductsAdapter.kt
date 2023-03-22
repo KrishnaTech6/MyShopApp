@@ -33,7 +33,7 @@ class MyProductsAdapter(private val context: Context,
         if (holder is ItemViewHolder){
 
             GlideLoader(context).loadProductPicture(item.productImage, holder.view.iv_item_product)
-            holder.view.tv_product_title.text = item.productTitle
+            holder.view.tv_title.text = item.productTitle
 
             if (holder.view.tv_product_price.text.contains("Rs.")){
 
