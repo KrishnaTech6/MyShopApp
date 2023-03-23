@@ -258,6 +258,7 @@ class FirestoreClass{
             }
 
     }
+
     fun getDashboarItemsList(fragment: DashboardFragment){
         mFirestore.collection(Constants.PRODUCTS)
             .get()
@@ -349,7 +350,7 @@ class FirestoreClass{
             }
             .addOnFailureListener { e->
                 activity.hideProgressDialog()
-                Log.e(javaClass.simpleName.toString(),
+                Log.e(activity.javaClass.simpleName,
                     "Error while creating the document for cart",
                     e)
             }
@@ -376,6 +377,33 @@ class FirestoreClass{
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error while loading cart items", e)
             }
+    }
+
+    fun getCartItemFromFirestore(activity: MyCartActivity){
+
+        mFirestore.collection(Constants.CART_ITEMS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Cart Item List", document.documents.toString())
+                val cartItemsList: ArrayList<CartItem> = ArrayList()
+
+                for (i in document.documents){
+                    val cartItem = i.toObject(CartItem::class.java)
+                    cartItem!!.id = i.id
+                    cartItemsList.add(cartItem)
+                }
+
+                activity.successCartItemFromFirestore(cartItemsList)
+
+            }
+            .addOnFailureListener { e->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName,
+                    "Error while creating the document for cart",
+                    e)
+            }
+
     }
 
 

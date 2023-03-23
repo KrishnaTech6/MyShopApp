@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 import com.example.myshop.models.CartItem
+import com.example.myshop.utils.GlideLoader
+import kotlinx.android.synthetic.main.cart_item.view.*
 
 
 class MyCartListAdapter(private val context: Context, private val cartItem: ArrayList<CartItem>):
@@ -21,10 +23,14 @@ class MyCartListAdapter(private val context: Context, private val cartItem: Arra
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val item = cartItem[position]
+        GlideLoader(context).loadProductPicture(item.image,holder.itemView.iv_item )
+        holder.itemView.tv_title.text = item.title
+        holder.itemView.tv_price.text = item.title
+
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return cartItem.size
     }
 }

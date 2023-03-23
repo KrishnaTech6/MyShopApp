@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myshop.R
+import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.CartItem
 import com.example.myshop.ui.adapters.MyCartListAdapter
 import kotlinx.android.synthetic.main.activity_cart.*
@@ -15,6 +16,10 @@ class MyCartActivity : BaseActivity() {
 
         setUpActionBar()
         supportActionBar?.title= ""
+
+        getCartProductList()
+
+
     }
 
     private fun setUpActionBar(){
@@ -25,7 +30,14 @@ class MyCartActivity : BaseActivity() {
         toolbar_cart_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
-    fun successProductsListFromFirestore(cartItemList: ArrayList<CartItem>){
+
+    fun getCartProductList(){
+        showDialogProgress(resources.getString(R.string.please_wait))
+
+        FirestoreClass().getCartItemFromFirestore(this)
+    }
+
+    fun successCartItemFromFirestore(cartItemList: ArrayList<CartItem>){
         hideProgressDialog()
 
         if (cartItemList.size > 0){

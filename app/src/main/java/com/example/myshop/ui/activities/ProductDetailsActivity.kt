@@ -1,5 +1,6 @@
 package com.example.myshop.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -111,6 +112,11 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
 
                 R.id.btn_add_to_cart ->{
                     addToCart()
+                }
+
+                R.id.btn_go_to_cart ->{
+                    val intent =Intent(this@ProductDetailsActivity, MyCartActivity::class.java)
+                    startActivity(intent)
                 }
 
             }
