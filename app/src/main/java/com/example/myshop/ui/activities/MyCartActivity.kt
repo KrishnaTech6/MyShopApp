@@ -17,7 +17,7 @@ class MyCartActivity : BaseActivity() {
         setUpActionBar()
         supportActionBar?.title= ""
 
-        getCartProductList()
+
 
 
     }
@@ -30,6 +30,10 @@ class MyCartActivity : BaseActivity() {
         toolbar_cart_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
+    override fun onResume() {
+        super.onResume()
+        getCartProductList()
+    }
 
     fun getCartProductList(){
         showDialogProgress(resources.getString(R.string.please_wait))
@@ -43,9 +47,9 @@ class MyCartActivity : BaseActivity() {
         if (cartItemList.size > 0){
             rv_cart_items.visibility = View.VISIBLE
             tv_cart_is_empty.visibility  = View.GONE
-            rv_cart_items.layoutManager = LinearLayoutManager(this) //didnt understand
+            rv_cart_items.layoutManager = LinearLayoutManager(this@MyCartActivity) //didnt understand
             rv_cart_items.setHasFixedSize(true)
-            val adapterProducts = MyCartListAdapter(this, cartItemList)
+            val adapterProducts = MyCartListAdapter(this@MyCartActivity, cartItemList)
             rv_cart_items.adapter = adapterProducts
         }
         else{
