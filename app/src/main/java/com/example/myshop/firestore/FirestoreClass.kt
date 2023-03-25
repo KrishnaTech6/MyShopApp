@@ -97,7 +97,7 @@ class FirestoreClass{
                     "${user.firstName} ${user.lastName}"
                 )
                 editor.apply()
-                //todo: pass the result to login screen
+
 
                 when(activity){
                     is LoginActivity -> {
@@ -340,6 +340,32 @@ class FirestoreClass{
                 }
             }
         }
+
+    fun getAllProducts(activity: MyCartActivity){
+        mFirestore.collection(Constants.PRODUCTS)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Products List", document.documents.toString())
+                val productsList: ArrayList<Products> = ArrayList()
+
+                for (i in document.documents){
+                    val product = i.toObject(Products::class.java)
+                    product!!.product_id = i.id
+                    productsList.add(product)
+                }
+
+                activity.successAllItemsListFromFirestore(productsList)
+
+            }
+            .addOnFailureListener { e->
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while getting product list",
+                    e
+                )
+            }
+
+    }
 
     fun addCartItems(activity: ProductDetailsActivity , addToCart: CartItem){
         mFirestore.collection(Constants.CART_ITEMS)

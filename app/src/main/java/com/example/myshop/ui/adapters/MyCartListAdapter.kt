@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 import com.example.myshop.models.CartItem
@@ -32,6 +33,30 @@ class MyCartListAdapter(private val context: Context, private val cartItem: Arra
         holder.view.tv_title.text = item.title
         holder.view.tv_price.text = "Rs.${ item.price }"
         holder.view.tv_cart_quantity.text = item.cart_quantity
+
+        if (item.cart_quantity=="0"){
+            holder.view.ib_add_item.visibility  = View.GONE
+            holder.view.ib_remove_item.visibility  = View.GONE
+
+            holder.view.tv_cart_quantity.text =
+                context.getText(R.string.lbl_out_of_stock)
+
+            holder.view.tv_cart_quantity.setTextColor(
+                    ContextCompat.getColor(context,
+                        R.color.colorSnackBarError)
+            )
+        }else{
+            holder.view.ib_add_item.visibility  = View.VISIBLE
+            holder.view.ib_remove_item.visibility  = View.VISIBLE
+            holder.view.tv_cart_quantity.setTextColor(
+                ContextCompat.getColor(context,
+                    R.color.colorSecondaryText)
+            )
+        }
+
+        holder.view.ib_delete_item.setOnClickListener{
+            //TODO: Method to delete cart item
+        }
 
         holder.view.setOnClickListener{
             val intent = Intent(context, ProductDetailsActivity::class.java)

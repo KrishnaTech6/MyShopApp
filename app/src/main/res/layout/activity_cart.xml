@@ -62,7 +62,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
             <com.example.myshop.utils.MSPTextView
                 android:id="@+id/tv_subtotal"
                 android:layout_width="0dp"
@@ -70,7 +71,9 @@
                 android:text="Subtotal"
                 android:textSize="16sp"
                 android:layout_weight="1"
-                android:layout_margin="@dimen/margin_mini"
+                android:layout_marginBottom="@dimen/margin_mini"
+                android:layout_marginStart="@dimen/margin_mini"
+                android:layout_marginEnd="@dimen/margin_mini"
                 />
             <com.example.myshop.utils.MSPTextView
                 android:id="@+id/tv_subtotal_price"
@@ -79,7 +82,9 @@
                 android:textSize="16sp"
                 android:textAlignment="center"
                 android:text="Rs. 100"
-                android:layout_margin="@dimen/margin_mini" />
+                android:layout_marginBottom="@dimen/margin_mini"
+                android:layout_marginStart="@dimen/margin_mini"
+                android:layout_marginEnd="@dimen/margin_mini" />
 
         </LinearLayout>
 
@@ -94,7 +99,9 @@
                 android:text="Shipping Charge"
                 android:textSize="16sp"
                 android:layout_weight="1"
-                android:layout_margin="@dimen/margin_mini"
+                android:layout_marginBottom="@dimen/margin_mini"
+                android:layout_marginStart="@dimen/margin_mini"
+                android:layout_marginEnd="@dimen/margin_mini"
                 />
             <com.example.myshop.utils.MSPTextView
                 android:id="@+id/shipping_price"
@@ -103,30 +110,36 @@
                 android:textSize="16sp"
                 android:text="Rs. 20"
                 android:textAlignment="center"
-                android:layout_margin="@dimen/margin_mini" />
+                android:layout_marginBottom="@dimen/margin_mini"
+                android:layout_marginStart="@dimen/margin_mini"
+                android:layout_marginEnd="@dimen/margin_mini" />
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <com.example.myshop.utils.MSPTextView
+            <com.example.myshop.utils.MSPTextViewBold
                 android:id="@+id/tv_total"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Total Amount"
                 android:textSize="16sp"
                 android:layout_weight="1"
-                android:layout_margin="@dimen/margin_mini"
+                android:layout_marginBottom="@dimen/margin_mini"
+                android:layout_marginStart="@dimen/margin_mini"
+                android:layout_marginEnd="@dimen/margin_mini"
                 />
-            <com.example.myshop.utils.MSPTextView
+            <com.example.myshop.utils.MSPTextViewBold
                 android:id="@+id/tv_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="Rs. 100"
                 android:textAlignment="center"
-                android:layout_margin="@dimen/margin_mini" />
+                android:layout_marginBottom="@dimen/margin_mini"
+                android:layout_marginStart="@dimen/margin_mini"
+                android:layout_marginEnd="@dimen/margin_mini" />
 
         </LinearLayout>
         <com.example.myshop.utils.MSPButton

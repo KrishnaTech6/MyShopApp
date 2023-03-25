@@ -31,7 +31,7 @@
         <entry key="app/src/main/res/drawable/user_image_border_settings.xml" value="0.166" />
         <entry key="app/src/main/res/layout/activity_add_product.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.2689814814814815" />
-        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_edit_product_data.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
@@ -45,6 +45,7 @@
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/cart_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dashboard_items_rv.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_base.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.21805555555555556" />
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.1" />
