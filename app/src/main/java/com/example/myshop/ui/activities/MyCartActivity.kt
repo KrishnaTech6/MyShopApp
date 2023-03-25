@@ -46,13 +46,37 @@ class MyCartActivity : BaseActivity() {
 
         if (cartItemList.size > 0){
             rv_cart_items.visibility = View.VISIBLE
+
             tv_cart_is_empty.visibility  = View.GONE
             rv_cart_items.layoutManager = LinearLayoutManager(this@MyCartActivity) //didnt understand
             rv_cart_items.setHasFixedSize(true)
             val adapterProducts = MyCartListAdapter(this@MyCartActivity, cartItemList)
             rv_cart_items.adapter = adapterProducts
+
+            var subTotal: Double =0.0
+
+            for (item in cartItemList){
+                val price= item.price.toDouble()
+                val quantity = item.cart_quantity.toInt()
+
+                subTotal += (price * quantity)
+            }
+
+            tv_subtotal_price.text = "Rs.${ subTotal }"
+            shipping_price.text = "Rs. 40" //TODo change logic for shipping price
+
+            if (subTotal>0){
+                ll_checkout.visibility = View.VISIBLE
+
+                val total:String = "Rs.${ subTotal + 40 }"  //TODo change logic for shipping price
+                tv_total_price.text = total
+            }
+            else{
+                ll_checkout.visibility = View.VISIBLE
+            }
         }
         else{
+            ll_checkout.visibility = View.GONE
             rv_cart_items.visibility = View.GONE
             tv_cart_is_empty.visibility  = View.VISIBLE
         }

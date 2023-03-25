@@ -67,7 +67,7 @@
                     android:layout_marginEnd="@dimen/margin_mini"
                     />
                 <com.example.myshop.utils.MSPTextView
-                    android:id="@+id/tv_item_no"
+                    android:id="@+id/tv_cart_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"

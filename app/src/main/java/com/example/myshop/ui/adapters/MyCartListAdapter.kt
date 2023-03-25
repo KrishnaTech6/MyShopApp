@@ -31,6 +31,7 @@ class MyCartListAdapter(private val context: Context, private val cartItem: Arra
         GlideLoader(context).loadProductPicture(item.image, holder.view.iv_item)
         holder.view.tv_title.text = item.title
         holder.view.tv_price.text = "Rs.${ item.price }"
+        holder.view.tv_cart_quantity.text = item.cart_quantity
 
         holder.view.setOnClickListener{
             val intent = Intent(context, ProductDetailsActivity::class.java)
