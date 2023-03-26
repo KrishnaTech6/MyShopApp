@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
+import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.CartItem
+import com.example.myshop.ui.activities.MyCartActivity
 import com.example.myshop.ui.activities.ProductDetailsActivity
 import com.example.myshop.utils.Constants
 import com.example.myshop.utils.GlideLoader
@@ -55,7 +57,12 @@ class MyCartListAdapter(private val context: Context, private val cartItem: Arra
         }
 
         holder.view.ib_delete_item.setOnClickListener{
-            //TODO: Method to delete cart item
+            when (context){
+                is MyCartActivity -> {
+                    context.showDialogProgress(context.resources.getString(R.string.please_wait))
+                }
+            }
+            FirestoreClass().removeCartItem(context, item.id)
         }
 
         holder.view.setOnClickListener{

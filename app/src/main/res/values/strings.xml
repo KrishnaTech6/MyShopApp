@@ -55,4 +55,5 @@
     <string name="cart_is_empty">No item found in cart.</string>
     <string name="checkout">CHECKOUT</string>
     <string name="lbl_out_of_stock">OUT OF STOCK</string>
+    <string name="item_remove_success">Item removed successfully.</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.myshop.ui.activities
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
@@ -49,14 +50,23 @@ class MyCartActivity : BaseActivity() {
     }
 
     fun successAllItemsListFromFirestore(productsList: ArrayList<Products>){
-        mProductsList = productsList
         hideProgressDialog()
+        mProductsList = productsList
         getCartProductList()
     }
 
-    fun getAllProducts(){  //Using this to get stock quantity
+    private fun getAllProducts(){  //Using this to get stock quantity
         showDialogProgress(resources.getString(R.string.please_wait))
         FirestoreClass().getAllProducts(this)
+    }
+
+    fun successRemoveCartItem(){
+        hideProgressDialog()
+        Toast.makeText(this,
+            resources.getString(R.string.item_remove_success),
+            Toast.LENGTH_SHORT).show()
+
+        getCartProductList()
     }
 
     fun successCartItemFromFirestore(cartItemList: ArrayList<CartItem>){
@@ -100,7 +110,7 @@ class MyCartActivity : BaseActivity() {
             }
 
             tv_subtotal_price.text = "Rs.${ subTotal }"
-            shipping_price.text = "Rs. 40" //TODo change logic for shipping price
+            shipping_price.text = "Rs.40" //TODo change logic for shipping price
 
             if (subTotal>0){
                 ll_checkout.visibility = View.VISIBLE

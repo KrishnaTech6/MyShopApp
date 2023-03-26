@@ -431,6 +431,22 @@ class FirestoreClass{
             }
 
     }
+    fun removeCartItem(context: Context, cart_id: String){
+        mFirestore.collection(Constants.CART_ITEMS)
+            .document(cart_id)
+            .delete()
+            .addOnSuccessListener {
+                when (context){
+                    is MyCartActivity ->
+                        context.successRemoveCartItem()
+
+                }
+
+            }
+            .addOnFailureListener {
+
+            }
+    }
 
 
     }
