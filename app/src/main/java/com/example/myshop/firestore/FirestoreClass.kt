@@ -367,6 +367,30 @@ class FirestoreClass{
 
     }
 
+    fun updateCartItem(context: Context, cart_id: String, itemHashMap: HashMap<String, Any>){
+
+        mFirestore.collection(Constants.CART_ITEMS)
+            .document(cart_id)
+            .update(itemHashMap)
+            .addOnSuccessListener {
+                when(context){
+                    is MyCartActivity ->{
+                        context.itemUpdateSuccess()
+                    }
+                }
+            }
+            .addOnFailureListener { e->
+
+                when(context){
+                    is MyCartActivity ->{
+                        context.hideProgressDialog()
+                    }
+                }
+                Log.e(context.javaClass.simpleName, "Error while updating cart item detail", e)
+            }
+
+    }
+
     fun addCartItems(activity: ProductDetailsActivity , addToCart: CartItem){
         mFirestore.collection(Constants.CART_ITEMS)
             .document()

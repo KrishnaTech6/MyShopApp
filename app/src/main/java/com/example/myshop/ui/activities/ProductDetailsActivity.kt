@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_product_details.*
 
 class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
     private var mProductId: String = ""
-    private lateinit var mProductDatails: Products
+    private lateinit var mProductDetails: Products
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_details)
@@ -35,6 +35,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
         }else{
             btn_add_to_cart.visibility = View.VISIBLE
         }
+
         getProductDetails()
 
         btn_add_to_cart.setOnClickListener(this)
@@ -47,17 +48,15 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
     }
     private fun setupActionbar(){
         setSupportActionBar(toolbar_product_details)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_white_arrow_base_24)
-
         toolbar_product_details.setNavigationOnClickListener { onBackPressed() }
     }
 
     fun successProductDetails(product: Products){
 
-        mProductDatails = product
-        //hideProgressDialog()
+        mProductDetails = product
+
         tv_product_name_pd.text = product.productTitle
         tv_product_price_pd.text = "Rs.${product.productPrice}"
         tv_product_desc_pd.text = product.productDescription
@@ -73,7 +72,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
             tv_product_quantity_pd.setTextColor(
                 ContextCompat.getColor(this,R.color.colorSnackBarError )
             )
-        }else{
+        }
+        else{
             if (FirestoreClass().getCurrentUserID() == product.user_id){
                 hideProgressDialog()
             }else{
@@ -88,22 +88,22 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
         val cartItems = CartItem(
             FirestoreClass().getCurrentUserID(),
             mProductId,
-            mProductDatails.productTitle,
-            mProductDatails.productPrice,
-            mProductDatails.productImage,
+            mProductDetails.productTitle,
+            mProductDetails.productPrice,
+            mProductDetails.productImage,
             Constants.DEFAULT_CART_QUANTITY,
-            mProductDatails.productQuantity
+            mProductDetails.productQuantity
         )
-
         showDialogProgress(resources.getString(R.string.please_wait))
         FirestoreClass().addCartItems(this, cartItems)
     }
+
     fun addToCartSuccess(){
         hideProgressDialog()
 
         Toast.makeText(this@ProductDetailsActivity,
         resources.getString(R.string.item_added_to_cart),
-        Toast.LENGTH_LONG
+        Toast.LENGTH_SHORT
         ).show()
 
         btn_add_to_cart.visibility = View.GONE
@@ -113,10 +113,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
 
     fun productExistsInCart(){
         hideProgressDialog()
-
         btn_add_to_cart.visibility = View.GONE
         btn_go_to_cart.visibility = View.VISIBLE
-
     }
 
     override fun onClick(v: View?) {
@@ -135,8 +133,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
 
             }
         }
-
-
-
     }
+
 }

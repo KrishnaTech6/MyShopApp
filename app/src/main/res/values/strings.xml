@@ -56,4 +56,5 @@
     <string name="checkout">CHECKOUT</string>
     <string name="lbl_out_of_stock">OUT OF STOCK</string>
     <string name="item_remove_success">Item removed successfully.</string>
+    <string name="msg_for_available_stock">Available stock is %1$s!. You can\'t add more than stock quantity.</string>
 </resources>
