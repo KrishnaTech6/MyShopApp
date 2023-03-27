@@ -25,6 +25,7 @@ class SettingsActivity : BaseActivity() , View.OnClickListener{
 
         btn_logout.setOnClickListener(this)
         edit_settings.setOnClickListener(this)
+        ll_addresses.setOnClickListener(this)
 
 
     }
@@ -75,6 +76,10 @@ class SettingsActivity : BaseActivity() , View.OnClickListener{
                 R.id.edit_settings -> {
                     val intent = Intent(this@SettingsActivity, UserProfileActivity::class.java)
                     intent.putExtra(Constants.EXTRA_USER_DETAILS, userDetails)
+                    startActivity(intent)
+                }
+                R.id.ll_addresses -> {
+                    val intent = Intent(this@SettingsActivity, AddressListActivity::class.java)
                     startActivity(intent)
                 }
 

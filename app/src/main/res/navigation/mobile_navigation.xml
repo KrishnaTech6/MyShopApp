@@ -5,7 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_dashboard">
 
-
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.myshop.ui.fragments.DashboardFragment"
@@ -17,9 +16,11 @@
         android:name="com.example.myshop.ui.fragments.ProductsFragment"
         android:label="@string/title_products"
         tools:layout="@layout/fragment_products" />
+
     <fragment
         android:id="@+id/navigation_orders"
         android:name="com.example.myshop.ui.fragments.OrdersFragment"
         android:label="@string/title_orders"
         tools:layout="@layout/fragment_orders" />
+
 </navigation>

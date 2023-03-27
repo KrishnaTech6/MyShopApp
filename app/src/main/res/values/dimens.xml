@@ -12,4 +12,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="margin_micro_plus">4dp</dimen>
+    <dimen name="radius_corner">4dp</dimen>
 </resources>
