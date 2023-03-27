@@ -61,4 +61,10 @@
     <string name="title_address_list">ADDRESS LIST</string>
     <string name="no_address_found">No Address Found!</string>
     <string name="lbl_add_address">Add Address</string>
+    <string name="add_address">ADD ADDRESS</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="pin_code">Pin code</string>
+    <string name="additional_note">Additional note</string>
 </resources>
