@@ -2,6 +2,7 @@ package com.example.myshop.ui.activities
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
@@ -20,6 +21,15 @@ class AddEditAddressActivity : BaseActivity(){
         btn_submit_address.setOnClickListener{
             saveAddressToFirestore()
         }
+
+        rg_address_type.setOnCheckedChangeListener{_, checkedId ->
+            if (checkedId == R.id.rb_OTHER){
+                til_other_details.visibility = View.VISIBLE
+            }else{
+                til_other_details.visibility = View.VISIBLE
+            }
+        }
+
     }
 
     fun setupActionBar(){
@@ -64,6 +74,8 @@ class AddEditAddressActivity : BaseActivity(){
 
         Toast.makeText(this@AddEditAddressActivity, resources.getString(R.string.address_uploaded_successfully),
         Toast.LENGTH_SHORT).show()
+
+        finish()
 
     }
 
