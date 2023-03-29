@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.example.myshop.models.Address
 import com.example.myshop.models.CartItem
 import com.example.myshop.models.Products
 import com.example.myshop.models.User
@@ -469,6 +470,20 @@ class FirestoreClass{
             }
             .addOnFailureListener {
 
+            }
+    }
+
+
+    fun saveAddressToFirestore(activity: AddEditAddressActivity, addressData: Address){
+        mFirestore.collection(Constants.ADDRESS)
+            .document()
+            .set(addressData, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.successAddressSaveToFirestore()
+            }
+            .addOnFailureListener { e->
+                Log.e(activity.javaClass.simpleName, "Error while getting address info from the server", e)
+                activity.hideProgressDialog()
             }
     }
 

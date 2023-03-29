@@ -185,6 +185,26 @@
                     android:checked="false"
                     android:textColor="@drawable/drawable_gender_tab_text_color_selector" />
             </RadioGroup>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_other_details"
+                android:visibility="gone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_mini"
+                android:layout_marginEnd="@dimen/margin_mini"
+                android:layout_marginTop="@dimen/margin_large"
+                android:hint="@string/other_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rg_address_type">
+
+                <com.example.myshop.utils.MSPEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/et_other_details"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
             <com.example.myshop.utils.MSPButton
                 android:id="@+id/btn_submit_address"
                 android:layout_width="match_parent"
@@ -199,7 +219,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rg_address_type" />
+                app:layout_constraintTop_toBottomOf="@+id/til_other_details" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

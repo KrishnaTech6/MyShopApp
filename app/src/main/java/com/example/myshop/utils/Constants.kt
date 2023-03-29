@@ -24,6 +24,7 @@ object Constants {
     const val GENDER: String = "gender"
     const val IMAGE: String = "image"
 
+
     const val COMPLETE_PROFILE: String = "profileCompleted"
 
 
@@ -52,6 +53,11 @@ object Constants {
     const val CART_ITEMS: String = "cart_items"
 
     const val PRODUCT_ID: String = "product_id"
+
+    const val ADDRESS: String = "Address"
+    const val HOME: String = "Home"
+    const val OFFICE: String = "Office"
+    const val OTHER: String = "Other"
 
 
 

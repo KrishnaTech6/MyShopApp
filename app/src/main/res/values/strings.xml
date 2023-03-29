@@ -72,4 +72,6 @@
     <string name="err_msg_please_enter_address">Please enter the complete address.</string>
     <string name="err_msg_please_enter_pincode">PLease enter the pincode.</string>
     <string name="address_uploaded_successfully">Address uploaded successfully.</string>
+    <string name="other_details">Add other details</string>
+    <string name="err_please_enter_other_details">Please enter other details.</string>
 </resources>
