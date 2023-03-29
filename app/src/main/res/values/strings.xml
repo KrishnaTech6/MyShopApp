@@ -67,4 +67,9 @@
     <string name="address">Address</string>
     <string name="pin_code">Pin code</string>
     <string name="additional_note">Additional note</string>
+    <string name="err_msg_please_enter_full_name">Please enter full name.</string>
+    <string name="err_msg_please_enter_phn_no">Please enter the phone number.</string>
+    <string name="err_msg_please_enter_address">Please enter the complete address.</string>
+    <string name="err_msg_please_enter_pincode">PLease enter the pincode.</string>
+    <string name="address_uploaded_successfully">Address uploaded successfully.</string>
 </resources>
