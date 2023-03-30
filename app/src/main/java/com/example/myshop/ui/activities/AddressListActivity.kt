@@ -2,11 +2,17 @@ package com.example.myshop.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myshop.R
+import com.example.myshop.firestore.FirestoreClass
+import com.example.myshop.models.Address
+import com.example.myshop.ui.adapters.AddressAdapter
 import kotlinx.android.synthetic.main.activity_address_list.*
 
-class AddressListActivity : AppCompatActivity() {
+class AddressListActivity : BaseActivity() {
+
+    private lateinit var mAddressList: ArrayList<Address>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +26,39 @@ class AddressListActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getAddressFromFirestore()
+    }
+
+    fun successAddressFromFirestore(addressList : ArrayList<Address>){
+        hideProgressDialog()
+
+        mAddressList = addressList
+
+        if (mAddressList.size > 0){
+            rv_address_list.visibility = View.VISIBLE
+            tv_no_address_found.visibility  = View.GONE
+
+            rv_address_list.layoutManager = LinearLayoutManager(this@AddressListActivity)
+            rv_address_list.setHasFixedSize(true)
+            val adapterAddress= AddressAdapter(this@AddressListActivity, addressList)
+            rv_address_list.adapter = adapterAddress
+
+        }
+        else{
+            rv_address_list.visibility = View.GONE
+            tv_no_address_found.visibility  = View.VISIBLE
+        }
+
+    }
+
+    private fun getAddressFromFirestore(){
+        showDialogProgress(resources.getString(R.string.please_wait))
+
+        FirestoreClass().getAddressList(this@AddressListActivity)
     }
 
     private fun setUpActionBar() {

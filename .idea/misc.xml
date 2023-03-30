@@ -46,6 +46,7 @@
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.287292817679558" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/address_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/cart_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dashboard_items_rv.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_base.xml" value="0.1" />
