@@ -32,14 +32,17 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
         }
         if (mUserId == FirestoreClass().getCurrentUserID()){
             btn_add_to_cart.visibility = View.GONE
+            floatingButton.visibility= View.VISIBLE
         }else{
             btn_add_to_cart.visibility = View.VISIBLE
+            floatingButton.visibility = View.GONE
         }
 
         getProductDetails()
 
         btn_add_to_cart.setOnClickListener(this)
         btn_go_to_cart.setOnClickListener(this)
+        floatingButton.setOnClickListener(this)
     }
 
     private fun getProductDetails(){
@@ -128,6 +131,12 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener{
 
                 R.id.btn_go_to_cart ->{
                     val intent =Intent(this@ProductDetailsActivity, MyCartActivity::class.java)
+                    startActivity(intent)
+                }
+
+                R.id.floatingButton->{
+                    val intent =Intent(this@ProductDetailsActivity, EditProductDataActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_ID2, mProductId)
                     startActivity(intent)
                 }
 

@@ -26,7 +26,7 @@ class AddEditAddressActivity : BaseActivity(){
             if (checkedId == R.id.rb_OTHER){
                 til_other_details.visibility = View.VISIBLE
             }else{
-                til_other_details.visibility = View.VISIBLE
+                til_other_details.visibility = View.GONE
             }
         }
 
