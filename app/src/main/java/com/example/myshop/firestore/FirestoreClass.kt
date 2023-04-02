@@ -508,5 +508,21 @@ class FirestoreClass{
             }
     }
 
+    fun editAddressData(activity: AddEditAddressActivity, addressInfo: Address, addressId:String){
+
+        mFirestore.collection(Constants.ADDRESS)
+            .document(addressId)
+            .set(addressInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.successAddressSaveToFirestore()
+
+            }
+            .addOnFailureListener { e->
+                Log.e(activity.javaClass.simpleName, "Error in updating address data", e)
+                activity.hideProgressDialog()
+            }
+
+    }
+
 
     }

@@ -62,15 +62,6 @@ object Constants {
     const val EXTRA_ADDRESS_DETAILS: String = "AddressDetails"
 
 
-
-
-
-
-
-
-
-
-
     fun showImageChooser(activity: Activity){
         //A request for adding image show of phone
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

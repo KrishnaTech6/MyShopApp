@@ -75,4 +75,9 @@
     <string name="other_details">Add other details</string>
     <string name="err_please_enter_other_details">Please enter other details.</string>
     <string name="edit_product_details">edit product details</string>
+
+    <string name="title_edit_address">EDIT ADDRESS</string>
+    <string name="btn_lbl_update">UPDATE</string>
+    <string name="msg_address_successfully_updated">Your address was updated successfully.</string>
+
 </resources>

@@ -30,7 +30,7 @@
         <entry key="app/src/main/res/drawable/ic_white_arrow_base_24.xml" value="0.246" />
         <entry key="app/src/main/res/drawable/user_image_border.xml" value="0.119" />
         <entry key="app/src/main/res/drawable/user_image_border_settings.xml" value="0.166" />
-        <entry key="app/src/main/res/layout/activity_add_edit_address.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_add_edit_address.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_product.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_address_list.xml" value="0.21574074074074073" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.2689814814814815" />
