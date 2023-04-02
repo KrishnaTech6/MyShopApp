@@ -3,6 +3,7 @@ package com.example.myshop.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.Address
 import com.example.myshop.ui.adapters.AddressAdapter
+import com.example.myshop.utils.SwipeToDeleteCallBack
 import com.example.myshop.utils.SwipeToEditCallBack
 import kotlinx.android.synthetic.main.activity_address_list.*
 
@@ -58,8 +60,16 @@ class AddressListActivity : BaseActivity() {
                     adapter.notifyEditItem(this@AddressListActivity, viewHolder.adapterPosition)
                 }
             }
+            val deleteSwipeHandler = object : SwipeToDeleteCallBack(this){
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val adapter = rv_address_list.adapter as AddressAdapter
+                    adapter.notifyDeleteItem(this@AddressListActivity, viewHolder.adapterPosition)
+                }
+            }
             val editItemTouchHelper = ItemTouchHelper(editSwipeHandler)
-            editItemTouchHelper.attachToRecyclerView(rv_address_list)
+            val deleteItemTouchHelper = ItemTouchHelper(deleteSwipeHandler)
+            editItemTouchHelper.attachToRecyclerView(rv_address_list)//to edit
+            deleteItemTouchHelper.attachToRecyclerView(rv_address_list)//to delete
 
         }
         else{
@@ -73,6 +83,12 @@ class AddressListActivity : BaseActivity() {
         showDialogProgress(resources.getString(R.string.please_wait))
 
         FirestoreClass().getAddressList(this@AddressListActivity)
+    }
+    fun successAddressDelete(){
+        hideProgressDialog()
+        Toast.makeText(this@AddressListActivity,
+            "Address was deleted successfully.",
+            Toast.LENGTH_SHORT).show()
     }
 
     private fun setUpActionBar() {

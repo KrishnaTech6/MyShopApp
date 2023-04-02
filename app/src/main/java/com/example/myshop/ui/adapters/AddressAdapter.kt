@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
+import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.Address
 import com.example.myshop.ui.activities.AddEditAddressActivity
+import com.example.myshop.ui.activities.AddressListActivity
 import com.example.myshop.utils.Constants
 import kotlinx.android.synthetic.main.address_item.view.*
 
@@ -37,6 +39,12 @@ class AddressAdapter( private val context: Context, private val addressList: Arr
         intent.putExtra(Constants.EXTRA_ADDRESS_DETAILS, addressList[position])
         activity.startActivity(intent)
         notifyItemChanged(position)
+    }
+    fun notifyDeleteItem(activity: AddressListActivity, position: Int){
+        activity.showDialogProgress(context.resources.getString(R.string.please_wait))
+        FirestoreClass().deleteAddress(activity, addressList[position].id)
+        notifyItemChanged(position)
+        FirestoreClass().getAddressList(activity)
     }
 
     override fun getItemCount(): Int {
