@@ -11,12 +11,17 @@ import com.example.myshop.utils.Constants
 import kotlinx.android.synthetic.main.activity_add_edit_address.*
 
 class AddEditAddressActivity : BaseActivity(){
+    private var mAddressDetails: Address? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_address)
 
         setupActionBar()
         supportActionBar?.title = ""
+
+        if (intent.hasExtra(Constants.EXTRA_ADDRESS_DETAILS)){
+            mAddressDetails= intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)
+        }
 
         btn_submit_address.setOnClickListener{
             saveAddressToFirestore()

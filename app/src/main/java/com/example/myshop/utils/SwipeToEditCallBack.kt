@@ -26,7 +26,7 @@ import com.example.myshop.R
      ): Int {
         /* To disable swipe for any item , code here */
 
-         if (viewHolder.adapterPosition==0) return 0
+         if (viewHolder.adapterPosition==10) return 0
          return super.getMovementFlags(recyclerView, viewHolder)
      }
 
