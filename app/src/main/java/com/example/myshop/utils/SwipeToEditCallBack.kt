@@ -59,7 +59,7 @@ import com.example.myshop.R
           but then canceled it before completing it.
           */
          if (isCanceled){
-             clearCanvas(c, itemView.left + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
+             clearCanvas(c, itemView.left + dX, itemView.top.toFloat(), itemView.left.toFloat(), itemView.bottom.toFloat())
              super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
              return
          }

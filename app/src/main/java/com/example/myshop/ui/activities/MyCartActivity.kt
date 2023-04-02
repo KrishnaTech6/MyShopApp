@@ -44,8 +44,6 @@ class MyCartActivity : BaseActivity() {
 
 
     fun getCartProductList(){
-        //showDialogProgress(resources.getString(R.string.please_wait))
-
         FirestoreClass().getCartItemFromFirestore(this)
     }
 
@@ -115,12 +113,12 @@ class MyCartActivity : BaseActivity() {
             }
 
             tv_subtotal_price.text = "Rs.${ subTotal }"
-            shipping_price.text = "Rs.40" //TODo change logic for shipping price
+            shipping_price.text = "Rs.40"
 
             if (subTotal>0){
                 ll_checkout.visibility = View.VISIBLE
 
-                val total:String = "Rs.${ subTotal + 40 }"  //TODo change logic for shipping price
+                val total:String = "Rs.${ subTotal + 40 }"
                 tv_total_price.text = total
             }
             else{
