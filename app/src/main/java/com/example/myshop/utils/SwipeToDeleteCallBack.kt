@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 
 
- abstract class SwipeToDeleteCallBack(context: Context)
+abstract class SwipeToDeleteCallBack(context: Context)
     : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
-    private val editIcon = ContextCompat.getDrawable(context, R.drawable.ic_vector_delete_white)
-    private val intrinsicWidth = editIcon!!.intrinsicWidth
-    private val intrinsicHeight = editIcon!!.intrinsicHeight
+    private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_vector_delete_white)
+    private val intrinsicWidth = deleteIcon!!.intrinsicWidth
+    private val intrinsicHeight = deleteIcon!!.intrinsicHeight
 
     val background = ColorDrawable()
-    val backgroundColor = Color.parseColor("#F4442D")
+    private val backgroundColor = Color.parseColor("#F4442D")
     private val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
 
      override fun getMovementFlags(
@@ -25,6 +25,10 @@ import com.example.myshop.R
          viewHolder: RecyclerView.ViewHolder
      ): Int {
         /* To disable swipe for any item , code here */
+
+//         - Here we set the direction of swipe.
+//         We return the direction flag in a static method makeMovementFlags.
+//         onMove - This is used for drag and drop. If not needed, return false here.
 
          if (viewHolder.adapterPosition==10) return 0
          return super.getMovementFlags(recyclerView, viewHolder)
@@ -36,7 +40,7 @@ import com.example.myshop.R
          target: RecyclerView.ViewHolder
      ): Boolean {
          return false
-         //won't allow the items to move
+         //onMove - This is used for drag and drop. If not needed, return false here.
      }
 
      override fun onChildDraw(
@@ -59,26 +63,26 @@ import com.example.myshop.R
           but then canceled it before completing it.
           */
          if (isCanceled){
-             clearCanvas(c, itemView.left + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
+             clearCanvas(c, itemView.right + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
              super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
              return
          }
 
          //draw the green edit background
          background.color = backgroundColor
-         background.setBounds(itemView.left + dX.toInt(),itemView.top, itemView.left, itemView.bottom )
+         background.setBounds(itemView.right + dX.toInt(),itemView.top, itemView.right, itemView.bottom )
          background.draw(c)
 
          //calculate position of edit icon
-         val editIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
-         val editIconMargin = (itemHeight - intrinsicHeight)
-         val editIconLeft = itemView.right - intrinsicWidth
-         val editIconRight = itemView.right - editIconMargin
-         val editIconBottom = editIconTop + intrinsicHeight
+         val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
+         val deleteIconMargin = (itemHeight - intrinsicHeight)/2
+         val deleteIconLeft = itemView.right - intrinsicWidth-deleteIconMargin
+         val deleteIconRight = itemView.right - deleteIconMargin
+         val deleteIconBottom = deleteIconTop + intrinsicHeight
 
          // Draw the delete icon
-         editIcon!!.setBounds(editIconLeft, editIconTop, editIconRight, editIconBottom)
-         editIcon.draw(c)
+         deleteIcon!!.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
+         deleteIcon.draw(c)
 
          super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
 

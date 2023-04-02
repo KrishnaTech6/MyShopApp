@@ -71,7 +71,7 @@ import com.example.myshop.R
 
          //calculate position of edit icon
          val editIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
-         val editIconMargin = (itemHeight - intrinsicHeight)
+         val editIconMargin = (itemHeight - intrinsicHeight)/2
          val editIconLeft = itemView.left + editIconMargin - intrinsicWidth
          val editIconRight = itemView.left + editIconMargin
          val editIconBottom = editIconTop + intrinsicHeight
