@@ -33,8 +33,8 @@ private val selectAddress: Boolean): RecyclerView.Adapter<AddressAdapter.ViewHol
         val item = addressList[position]
 
         holder.itemView.tv_address_full_name.text = item.name
-        holder.itemView.tv_address_item.text = item.address
-        holder.itemView.tv_address_phone_number.text = item.mobileNumber
+        holder.itemView.tv_address_item.text = "${ item.address }, ${item.pinCode}"
+        holder.itemView.tv_address_phone_number.text = "+91 ${item.mobileNumber}"
         holder.itemView.tv_address_type.text = item.type
 
         if (selectAddress){
@@ -47,7 +47,7 @@ private val selectAddress: Boolean): RecyclerView.Adapter<AddressAdapter.ViewHol
     fun notifyEditItem(activity: Activity, position: Int){
         val intent = Intent(context, AddEditAddressActivity::class.java)
         intent.putExtra(Constants.EXTRA_ADDRESS_DETAILS, addressList[position])
-        activity.startActivity(intent)
+        activity.startActivityForResult(intent, Constants.ADD_ADDRESS_REQUEST_CODE)
         notifyItemChanged(position)
     }
     fun notifyDeleteItem(activity: AddressListActivity, position: Int){
