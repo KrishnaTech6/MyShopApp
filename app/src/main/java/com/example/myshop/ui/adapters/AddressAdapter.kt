@@ -7,6 +7,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
@@ -16,7 +17,9 @@ import com.example.myshop.ui.activities.AddressListActivity
 import com.example.myshop.utils.Constants
 import kotlinx.android.synthetic.main.address_item.view.*
 
-class AddressAdapter( private val context: Context, private val addressList: ArrayList<Address>): RecyclerView.Adapter<AddressAdapter.ViewHolder>(){
+class AddressAdapter( private val context: Context,
+                      private val addressList: ArrayList<Address>,
+private val selectAddress: Boolean): RecyclerView.Adapter<AddressAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
@@ -33,6 +36,12 @@ class AddressAdapter( private val context: Context, private val addressList: Arr
         holder.itemView.tv_address_item.text = item.address
         holder.itemView.tv_address_phone_number.text = item.mobileNumber
         holder.itemView.tv_address_type.text = item.type
+
+        if (selectAddress){
+            holder.itemView.setOnClickListener{
+                Toast.makeText(context, "Address is : ${item.address}, ${item.pinCode} ", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     }
     fun notifyEditItem(activity: Activity, position: Int){

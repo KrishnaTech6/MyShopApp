@@ -120,7 +120,6 @@ class AddEditAddressActivity : BaseActivity(){
         Toast.makeText(this@AddEditAddressActivity,
             notifySuccessMessage,
             Toast.LENGTH_SHORT).show()
-
         finish()
 
     }

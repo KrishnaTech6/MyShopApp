@@ -1,5 +1,6 @@
 package com.example.myshop.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,6 +10,7 @@ import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.CartItem
 import com.example.myshop.models.Products
 import com.example.myshop.ui.adapters.MyCartListAdapter
+import com.example.myshop.utils.Constants
 import kotlinx.android.synthetic.main.activity_cart.*
 
 class MyCartActivity : BaseActivity() {
@@ -22,6 +24,15 @@ class MyCartActivity : BaseActivity() {
 
         setUpActionBar()
         supportActionBar?.title= ""
+
+
+        btn_checkout.setOnClickListener {
+
+            val intent = Intent(this@MyCartActivity, AddressListActivity::class.java)
+            intent.putExtra(Constants.EXTRA_SELECT_ADDRESS, true)
+            startActivity(intent)
+
+        }
 
 
 

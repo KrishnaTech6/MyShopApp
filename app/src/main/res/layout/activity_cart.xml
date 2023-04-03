@@ -143,7 +143,7 @@
 
         </LinearLayout>
         <com.example.myshop.utils.MSPButton
-            android:id="@+id/btn_submit_product"
+            android:id="@+id/btn_checkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_small"
