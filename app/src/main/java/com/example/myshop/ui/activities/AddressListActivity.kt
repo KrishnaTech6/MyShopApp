@@ -28,6 +28,8 @@ class AddressListActivity : BaseActivity() {
         setUpActionBar()
         supportActionBar?.title=""
 
+        getAddressFromFirestore()
+
         tv_add_addresses.setOnClickListener{
             val intent = Intent(this@AddressListActivity, AddEditAddressActivity::class.java)
             startActivityForResult(intent, Constants.ADD_ADDRESS_REQUEST_CODE)
@@ -42,10 +44,14 @@ class AddressListActivity : BaseActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        getAddressFromFirestore()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == RESULT_OK){
+            getAddressFromFirestore()
+        }
     }
+
+
 
     fun successAddressFromFirestore(addressList : ArrayList<Address>){
         hideProgressDialog()
