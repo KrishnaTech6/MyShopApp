@@ -7,13 +7,13 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.Address
 import com.example.myshop.ui.activities.AddEditAddressActivity
 import com.example.myshop.ui.activities.AddressListActivity
+import com.example.myshop.ui.activities.CheckoutActivity
 import com.example.myshop.utils.Constants
 import kotlinx.android.synthetic.main.address_item.view.*
 
@@ -39,7 +39,9 @@ private val selectAddress: Boolean): RecyclerView.Adapter<AddressAdapter.ViewHol
 
         if (selectAddress){
             holder.itemView.setOnClickListener{
-                Toast.makeText(context, "Address is : ${item.address}, ${item.pinCode} ", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, CheckoutActivity::class.java)
+                intent.putExtra(Constants.EXTRA_SELECTED_ADDRESS, item)
+                context.startActivity(intent)
             }
         }
 
