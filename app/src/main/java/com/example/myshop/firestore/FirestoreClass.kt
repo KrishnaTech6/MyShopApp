@@ -342,7 +342,7 @@ class FirestoreClass{
             }
         }
 
-    fun getAllProducts(activity: MyCartActivity){
+    fun getAllProducts(activity: Activity){
         mFirestore.collection(Constants.PRODUCTS)
             .get()
             .addOnSuccessListener { document ->
@@ -355,7 +355,19 @@ class FirestoreClass{
                     productsList.add(product)
                 }
 
-                activity.successAllItemsListFromFirestore(productsList)
+                when (activity){
+                    is MyCartActivity ->{
+                        activity.successAllItemsListFromFirestore(productsList)
+                    }
+                    is CheckoutActivity ->{
+                        activity.successProductsList(productsList)
+                    }
+
+
+                }
+
+
+
 
             }
             .addOnFailureListener { e->
@@ -430,7 +442,7 @@ class FirestoreClass{
             }
     }
 
-    fun getCartItemFromFirestore(activity: MyCartActivity){
+    fun getCartItemFromFirestore(activity: Activity){
 
         mFirestore.collection(Constants.CART_ITEMS)
             .whereEqualTo(Constants.USER_ID, getCurrentUserID())
@@ -445,11 +457,27 @@ class FirestoreClass{
                     cartItemsList.add(cartItem)
                 }
 
-                activity.successCartItemFromFirestore(cartItemsList)
+                when (activity){
+                    is MyCartActivity ->{
+                        activity.successCartItemFromFirestore(cartItemsList)
+                    }
+                    is CheckoutActivity ->{
+                        activity.successCartItemsList(cartItemsList)
+                    }
+                }
+
+
 
             }
             .addOnFailureListener { e->
-                activity.hideProgressDialog()
+                when (activity){
+                    is MyCartActivity ->{
+                        activity.hideProgressDialog()
+                    }
+                    is CheckoutActivity ->{
+                        activity.hideProgressDialog()
+                    }
+                }
                 Log.e(activity.javaClass.simpleName,
                     "Error while creating the document for cart",
                     e)
