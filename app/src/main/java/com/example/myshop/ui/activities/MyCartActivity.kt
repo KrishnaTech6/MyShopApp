@@ -105,7 +105,7 @@ class MyCartActivity : BaseActivity() {
             tv_cart_is_empty.visibility  = View.GONE
             rv_cart_items.layoutManager = LinearLayoutManager(this@MyCartActivity) //didnt understand
             rv_cart_items.setHasFixedSize(true)
-            val adapterProducts = MyCartListAdapter(this@MyCartActivity, cartItemList)
+            val adapterProducts = MyCartListAdapter(this@MyCartActivity, mCartListItem, true)
             rv_cart_items.adapter = adapterProducts
 
             var subTotal: Double =0.0

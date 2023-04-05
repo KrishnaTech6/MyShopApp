@@ -18,9 +18,8 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:paddingStart="@dimen/margin_mini"
-            android:paddingEnd="0dp"
             android:text="@string/checkout"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -30,9 +29,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_checkout_place_order"
         android:layout_below="@id/toolbar_checkout_activity"
         android:fillViewport="true"
+        android:layout_marginBottom="@dimen/margin_mini"
         android:scrollbars="none">
 
         <RelativeLayout
@@ -46,7 +47,6 @@
                 android:layout_marginStart="@dimen/margin_mini"
                 android:layout_marginTop="@dimen/margin_mini"
                 android:layout_marginEnd="@dimen/margin_mini"
-                android:layout_marginBottom="@dimen/margin_mini"
                 android:paddingTop="@dimen/margin_micro_plus"
                 android:paddingBottom="@dimen/margin_micro_plus"
                 android:text="@string/checkout_lbl_product_items"
@@ -242,12 +242,13 @@
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:orientation="vertical"
-        android:padding="@dimen/margin_micro_plus"
+        android:padding="@dimen/margin_mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
+            android:layout_margin="@dimen/margin_micro_plus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_micro_plus"
@@ -267,7 +268,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lbl_cash_on_delivery"
                 android:textAlignment="center"
-                android:textColor="@color/colorSecondaryText"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
 

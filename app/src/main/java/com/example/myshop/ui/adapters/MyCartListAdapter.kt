@@ -17,7 +17,10 @@ import com.example.myshop.utils.GlideLoader
 import kotlinx.android.synthetic.main.cart_item.view.*
 
 
-class MyCartListAdapter(private val context: Context, private val cartItem: ArrayList<CartItem>):
+class MyCartListAdapter(private val context: Context,
+                        private val cartItem: ArrayList<CartItem>,
+                        private val updateCartItem: Boolean
+                        ):
     RecyclerView.Adapter<MyCartListAdapter.CartViewHolder>()  {
 
     class CartViewHolder(val view: View) : RecyclerView.ViewHolder(view)
@@ -40,6 +43,13 @@ class MyCartListAdapter(private val context: Context, private val cartItem: Arra
             holder.view.ib_add_item.visibility  = View.GONE
             holder.view.ib_remove_item.visibility  = View.GONE
 
+            if (updateCartItem){
+                holder.view.ib_delete_item.visibility = View.VISIBLE
+            }
+            else{
+                holder.view.ib_delete_item.visibility = View.GONE
+            }
+
             holder.view.tv_cart_quantity.text =
                 context.getText(R.string.lbl_out_of_stock)
 
@@ -48,8 +58,17 @@ class MyCartListAdapter(private val context: Context, private val cartItem: Arra
                         R.color.colorSnackBarError)
             )
         }else{
-            holder.view.ib_add_item.visibility  = View.VISIBLE
-            holder.view.ib_remove_item.visibility  = View.VISIBLE
+
+            if (updateCartItem){
+                holder.view.ib_add_item.visibility  = View.VISIBLE
+                holder.view.ib_remove_item.visibility  = View.VISIBLE
+                holder.view.ib_delete_item.visibility = View.VISIBLE
+            }
+            else{
+                holder.view.ib_add_item.visibility  = View.GONE
+                holder.view.ib_remove_item.visibility  = View.GONE
+                holder.view.ib_delete_item.visibility = View.GONE
+            }
             holder.view.tv_cart_quantity.setTextColor(
                 ContextCompat.getColor(context,
                     R.color.colorSecondaryText)
