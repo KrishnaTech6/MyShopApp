@@ -1,11 +1,13 @@
 package com.example.myshop.ui.activities
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
 import com.example.myshop.models.Address
 import com.example.myshop.models.CartItem
+import com.example.myshop.models.Order
 import com.example.myshop.models.Products
 import com.example.myshop.ui.adapters.MyCartListAdapter
 import com.example.myshop.utils.Constants
@@ -16,6 +18,10 @@ class CheckoutActivity : BaseActivity() {
     private var mAddressDetails: Address? = null
     private lateinit var mProductsList: ArrayList<Products>
     private lateinit var mCartItemsList: ArrayList<CartItem>
+
+    private var mSubTotal: Double = 0.0
+    private var mTotalAmount: Double = 0.0
+    private var mShippingPrice: Double = 40.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
@@ -38,6 +44,25 @@ class CheckoutActivity : BaseActivity() {
             }
         }
         getProductList()
+    }
+
+    private fun placeAnOrder(){
+        showDialogProgress(resources.getString(R.string.please_wait))
+
+        if (mAddressDetails!=null){
+            val order = Order(
+                FirestoreClass().getCurrentUserID(),
+                mCartItemsList,
+                mAddressDetails!!,
+                "My Order ${System.currentTimeMillis()}",
+                mCartItemsList[0].image,
+                mSubTotal.toString(),
+                mShippingPrice.toString(),
+                mTotalAmount.toString()
+                )
+        }
+
+
     }
 
     fun getProductList(){
@@ -71,7 +96,6 @@ class CheckoutActivity : BaseActivity() {
         val checkoutAdapter = MyCartListAdapter(this ,mCartItemsList, false)
         rv_cart_list_items.adapter = checkoutAdapter
 
-        var subTotal: Double =0.0
 
         for (item in mCartItemsList){
 
@@ -80,19 +104,23 @@ class CheckoutActivity : BaseActivity() {
             if (availableQuantity>0){
                 val price= item.price.toDouble()
                 val quantity = item.cart_quantity.toInt()
-                subTotal += (price * quantity)
+                mSubTotal += (price * quantity)
 
             }
 
         }
 
-        tv_checkout_sub_total.text = "Rs.$subTotal"
-        val shippingPrice = 40
-        tv_checkout_shipping_charge.text = "Rs. $shippingPrice"
+        tv_checkout_sub_total.text = "Rs.$mSubTotal"
+        tv_checkout_shipping_charge.text = "Rs.$mShippingPrice"
 
-        val totalAmount = subTotal+shippingPrice
+        if (mSubTotal>0){
+            ll_checkout_place_order.visibility = View.VISIBLE
+            mTotalAmount= mSubTotal+mShippingPrice
 
-        tv_checkout_total_amount.text = "Rs.$totalAmount"
+            tv_checkout_total_amount.text = "Rs.$mTotalAmount"
+        }else{
+            ll_checkout_place_order.visibility = View.GONE
+        }
 
 
     }
