@@ -6,10 +6,7 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
-import com.example.myshop.models.Address
-import com.example.myshop.models.CartItem
-import com.example.myshop.models.Products
-import com.example.myshop.models.User
+import com.example.myshop.models.*
 import com.example.myshop.ui.activities.*
 import com.example.myshop.ui.fragments.DashboardFragment
 import com.example.myshop.ui.fragments.ProductsFragment
@@ -563,6 +560,21 @@ class FirestoreClass{
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error while deleting address", e)
 
+            }
+    }
+
+
+    fun placeOrder(activity: CheckoutActivity, order: Order){
+        mFirestore.collection(Constants.ORDERS)
+            .document()
+            .set(order, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.orderPlacedSuccess()
+            }
+            .addOnFailureListener { e->
+
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Erroe while uploading order in firestore", e)
             }
     }
 

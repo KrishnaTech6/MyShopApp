@@ -1,7 +1,9 @@
 package com.example.myshop.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myshop.R
 import com.example.myshop.firestore.FirestoreClass
@@ -44,6 +46,10 @@ class CheckoutActivity : BaseActivity() {
             }
         }
         getProductList()
+
+        btn_place_order.setOnClickListener{
+            placeAnOrder()
+        }
     }
 
     private fun placeAnOrder(){
@@ -60,9 +66,20 @@ class CheckoutActivity : BaseActivity() {
                 mShippingPrice.toString(),
                 mTotalAmount.toString()
                 )
+
+            FirestoreClass().placeOrder(this, order)
         }
+    }
+    fun orderPlacedSuccess(){
+        hideProgressDialog()
 
+        Toast.makeText(this@CheckoutActivity, "The order was placed successfully.", Toast.LENGTH_SHORT)
+            .show()
 
+        val intent = Intent(this@CheckoutActivity, DashboardActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
     fun getProductList(){

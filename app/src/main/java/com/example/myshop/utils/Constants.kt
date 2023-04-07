@@ -68,6 +68,8 @@ object Constants {
 
     const val STOCK_QUANTITY: String = "stock_quantity"
 
+    const val ORDERS: String = "orders"
+
 
     fun showImageChooser(activity: Activity){
         //A request for adding image show of phone
