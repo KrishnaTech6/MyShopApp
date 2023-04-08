@@ -66,7 +66,7 @@ object Constants {
     const val EXTRA_SELECTED_ADDRESS: String = "extra_selected_address"
     const val ADD_ADDRESS_REQUEST_CODE: Int = 121
 
-    const val STOCK_QUANTITY: String = "stock_quantity"
+    const val STOCK_QUANTITY: String = "productQuantity"
 
     const val ORDERS: String = "orders"
 

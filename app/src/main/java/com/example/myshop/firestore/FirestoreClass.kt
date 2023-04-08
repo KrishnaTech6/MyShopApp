@@ -574,8 +574,43 @@ class FirestoreClass{
             .addOnFailureListener { e->
 
                 activity.hideProgressDialog()
-                Log.e(activity.javaClass.simpleName, "Erroe while uploading order in firestore", e)
+                Log.e(activity.javaClass.simpleName, "Error while uploading order in firestore", e)
             }
+    }
+
+
+    fun updateAllDetails(activity: CheckoutActivity, cartList: ArrayList<CartItem>){
+
+        val writeBatch = mFirestore.batch()
+
+        for (cartItem in cartList){
+
+            val productHashMap = HashMap<String, Any>()
+            productHashMap[Constants.STOCK_QUANTITY] =
+                (cartItem.stock_quantity.toInt() - cartItem.cart_quantity.toInt()).toString()
+
+            val documentReference =mFirestore.collection(Constants.PRODUCTS)
+                .document(cartItem.product_id)
+
+            writeBatch.update(documentReference, productHashMap)
+
+        }
+        //to delete cart item after order
+        for (cartItem in cartList){
+            val documentReference = mFirestore.collection(Constants.CART_ITEMS)
+                .document(cartItem.id)
+            writeBatch.delete(documentReference)
+        }
+
+        writeBatch.commit().addOnSuccessListener {
+            activity.allUpdateSuccess()
+        }
+            .addOnFailureListener { e->
+                activity.hideProgressDialog()
+
+                Log.e(activity.javaClass.simpleName, "Error in writing batch to firestore ", e)
+            }
+
     }
 
 
