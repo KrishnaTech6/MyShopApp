@@ -14,6 +14,6 @@ data class Order(
     val sub_total_amount:String = "",
     val shipping_charge:String = "",
     val total_amount:String = "",
-    val id:String = ""
+    var id:String = ""
 
     ):Parcelable

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.myshop.models.*
 import com.example.myshop.ui.activities.*
 import com.example.myshop.ui.fragments.DashboardFragment
+import com.example.myshop.ui.fragments.OrdersFragment
 import com.example.myshop.ui.fragments.ProductsFragment
 import com.example.myshop.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -608,9 +609,32 @@ class FirestoreClass{
             .addOnFailureListener { e->
                 activity.hideProgressDialog()
 
-                Log.e(activity.javaClass.simpleName, "Error in writing batch to firestore ", e)
+                Log.e(activity.javaClass.simpleName, "Error in writing batch to fire store ", e)
             }
 
+    }
+
+    fun getMyOrdersList(fragment: OrdersFragment){
+        mFirestore.collection(Constants.ORDERS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                val list: ArrayList<Order> =ArrayList()
+
+                for (i in document.documents){
+                    val orderItem = i.toObject(Order::class.java)!!
+                    orderItem.id = i.id
+                    list.add(orderItem)
+                }
+
+                fragment.populateOrderListinUI(list)
+            }
+            .addOnFailureListener {
+                e->
+                fragment.hideProgressDialog()
+
+                Log.e(fragment.javaClass.simpleName, "Error while getting orders list", e)
+            }
     }
 
 

@@ -54,6 +54,7 @@
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.21805555555555556" />
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_orderlist_layout.xml" value="0.21712962962962962" />
         <entry key="app/src/main/res/layout/product_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/progress_dialog.xml" value="0.335" />
         <entry key="app/src/main/res/menu/add_products_menu.xml" value="0.21712962962962962" />

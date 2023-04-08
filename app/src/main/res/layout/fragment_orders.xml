@@ -6,15 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.OrdersFragment">
 
-    <TextView
-        android:id="@+id/text_orders"
+    <com.example.myshop.utils.MSPTextView
+        android:id="@+id/tv_no_orders_placed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:text="@string/no_orders_placed_yet"
         android:textSize="20sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_orders"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+        
 
 </androidx.constraintlayout.widget.ConstraintLayout>

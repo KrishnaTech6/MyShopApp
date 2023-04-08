@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f4f4f4"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_micro_plus">
+
+    <LinearLayout
+        android:id="@+id/item_orders_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_item_orders"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/user_image_border"
+            android:padding="4dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_orders_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_mini"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_item_product"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.example.myshop.utils.MSPTextViewBold
+                android:id="@+id/tv_title_orders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_mini"
+                android:text="Product name"
+                android:textSize="18sp" />
+
+            <com.example.myshop.utils.MSPTextView
+                android:id="@+id/tv_product_price_orders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs.1012"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ib_delete_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_mini"
+        android:layout_marginEnd="@dimen/margin_mini"
+        android:background="@android:color/transparent"
+        android:padding="@dimen/margin_micro_plus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_baseline_delete_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
